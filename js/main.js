@@ -22,13 +22,13 @@ let app = new Vue({
 		isLogin: false,
 		currentUser:AV.User.current(),
 		loginpartSeen: true,
-		currentUser:null,
-		infos: ['男 / 1994.07', '集美大学 · 光电信息科学与工程', '本科 / 2017年毕业'],
+		infos: [`男 / 1994.07`, `集美大学 · 光电信息科学与工程`, `本科 / 2017年毕业`],
+		practices:[{time:`2016.07 ~ 2016.10`,company:`四三九九(厦门)网络股份有限公司`,description:`负责4399儿歌、动漫业务PC端及移动端的多个活动页面的前端开发，原有网站的前端界面更新及维护，使其达到更好的视觉体验和用户体验。同时参与了4399表情站整站的前端开发，并兼容至IE6，上线后不断的维护与优化。`,},{time:`2016.07 ~ 2016.10`,company:`四三九九(厦门)网络股份有限公司`,description:`负责4399儿歌、动漫业务PC端及移动端的多个活动页面的前端开发，原有网站的前端界面更新及维护，使其达到更好的视觉体验和用户体验。同时参与了4399表情站整站的前端开发，并兼容至IE6，上线后不断的维护与优化。`,},{time:`2015.10 ~ 至今`,company:`集美大学·智弧信息科技工作室`,description:`负责与客户对接开发需求、制作原型及UI，并参与项目的研发及维护，此外还负责项目的前端工作分配，参与各创业比赛及路演， 以智弧工作室为项目参加福建省“创青春”创新创业大赛获得创业之星称号。`,}],
 		signup: {
-			email: '',
-			password: '',
+			email: ``,
+			password: ``,
 		},
-		login:{email:'',password:'',},
+		login:{email:``,password:``,},
 	},
 	methods: {
 		changeInfos(i, ev) {
@@ -36,7 +36,7 @@ let app = new Vue({
 		},
 		clickSaveBtn() {
 			if (this.currentUser) {
-				this.saveData(this.currentUser).then(()=>alert('成功保存到云端!'));
+				this.saveData(this.currentUser).then(()=>alert('成功保存到云端!'),()=>{alert('保存失败!')});
 			} else {
 				this.isLogin = true;
 			}
@@ -61,7 +61,6 @@ return user.save();
 				this.isLogin= false;
 				this.currentUser = AV.User.current();
 			}, function(error) {
-				console.log(error)
 				if (error.code === 211) {
 					alert('该邮箱未注册,请先注册!');
 				} else if (error.code === 210) {
@@ -74,11 +73,27 @@ return user.save();
 			user.setUsername(this.signup.email);
 			user.setPassword(this.signup.password);
 			user.setEmail(this.signup.email);
-			user.signUp().then(function(loginedUser) {
-				console.log(loginedUser);
+			user.signUp().then((loginedUser)=> {
+				alert('注册成功!');
+				this.isLogin = false;
+				this.currentUser = loginedUser;
 			}, function(error) {
-				alert('此电子邮箱已经被占用!');
+				//console.dir(error) 可以看出error的层级
+				alert(error.rawMessage);
 			});
+		},
+		getLcData(){
+var query = new AV.Query('User');
+  query.get(this.currentUser.id).then((datas)=> {
+    this.currentUser = datas;
+    let data = this.currentUser.toJSON();
+    this.infos = data.infos;
+
+  });
 		},
 	}
 });
+
+if(app.currentUser){
+	app.getLcData();
+}
