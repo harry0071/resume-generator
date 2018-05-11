@@ -117,6 +117,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
       content: '';
     }
 
+[v-cloak]{
+  display: none !important;
+}
 body {
   color: #333;
   font-size: 14px;

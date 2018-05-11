@@ -12,7 +12,7 @@
 <body>
 <!--[if IE]><p class="kill-ie">微软都放弃了IE，为啥你却还不放弃？</p><![endif]-->
 <div id="app">
-    <div id="login" v-show="isLogin">
+    <div id="login" v-show="isLogin" v-cloak>
         <form @submit.prevent="onSignup">
             <a href="javascript:;" @click="loginpartSeen=true">登录</a><a href="javascript:;" @click="loginpartSeen=false">注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">x</span>
             <div id="login-part" v-if="loginpartSeen">
@@ -31,6 +31,8 @@
         <button id="save-btn" @click="clickSaveBtn">保存</button>
         <button id="share-btn">分享</button>
         <button id="print-btn">打印</button>
+        <button id="logout" @click="clickLogout" v-show="currentUser" v-cloak>登出</button>
+        {{currentUser}}
     </nav>
 <a class=pdf href=resume.pdf><i class="iconfont icon-pdf"></i> PDF简历</a>
 <div class=content>

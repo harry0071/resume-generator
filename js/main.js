@@ -20,7 +20,9 @@ let app = new Vue({
 	el: '#app',
 	data: {
 		isLogin: false,
+		currentUser:AV.User.current(),
 		loginpartSeen: true,
+		currentUser:null,
 		infos: ['男 / 1994.07', '集美大学 · 光电信息科学与工程', '本科 / 2017年毕业'],
 		signup: {
 			email: '',
@@ -33,13 +35,14 @@ let app = new Vue({
 			this.infos[i] = ev.target.innerText;
 		},
 		clickSaveBtn() {
-			var currentUser = AV.User.current();
-			if (currentUser) {
-				this.saveData(currentUser).then(()=>alert('成功保存到云端!'));
-				
+			if (this.currentUser) {
+				this.saveData(this.currentUser).then(()=>alert('成功保存到云端!'));
 			} else {
 				this.isLogin = true;
 			}
+		},
+		clickLogout(){
+			AV.User.logOut().then(()=>location.reload());
 		},
 		saveData(currentUser){
 			var user = AV.Object.createWithoutData('User', currentUser.id);
@@ -54,9 +57,11 @@ return user.save();
 			}
 		},
 		doLogin() {
-			AV.User.logIn(this.login.email, this.login.password).then(function(loginedUser) {
-				console.log(loginedUser);
+			AV.User.logIn(this.login.email, this.login.password).then((loginedUser)=> {
+				this.isLogin= false;
+				this.currentUser = AV.User.current();
 			}, function(error) {
+				console.log(error)
 				if (error.code === 211) {
 					alert('该邮箱未注册,请先注册!');
 				} else if (error.code === 210) {
