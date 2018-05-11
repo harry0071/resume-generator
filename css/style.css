@@ -403,6 +403,10 @@ a {
   min-width: 320px;
   min-height: 400px;
 }
+#login label{
+  display: block;
+  margin-top: 20px;
+}
 .close{
   background: yellow;
   padding: 4px 10px;

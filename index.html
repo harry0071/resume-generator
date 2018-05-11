@@ -12,11 +12,21 @@
 <body>
 <!--[if IE]><p class="kill-ie">微软都放弃了IE，为啥你却还不放弃？</p><![endif]-->
 <div id="app">
-    <div id="login" v-show="loginSeen">
-        <form>
-            登录 <span @click="loginSeen = false" class="close">x</span>
+    <div id="login" v-show="isLogin">
+        <form @submit.prevent="onSignup">
+            <a href="javascript:;" @click="loginpartSeen=true">登录</a><a href="javascript:;" @click="loginpartSeen=false">注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">x</span>
+            <div id="login-part" v-if="loginpartSeen">
+            <label>邮箱：<input type="email" required v-model="login.email"></label>
+            <label>密码：<input type="password" required v-model="login.password"></label>
+            <button type="submit">登录</button> 
+           </div>
+  <div id="signup-part" v-if="!loginpartSeen">
+            <label>邮箱：<input type="email" required v-model="signup.email"></label>
+            <label>密码：<input type="password" required v-model="signup.password"></label>
+            <button type="submit">注册</button> 
+            </div>
         </form>
-    </div>
+    </div> 
     <nav>
         <button id="save-btn" @click="clickSaveBtn">保存</button>
         <button id="share-btn">分享</button>

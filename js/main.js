@@ -19,8 +19,14 @@ Vue.component('vue-item', {
 let app = new Vue({
 	el: '#app',
 	data: {
-		loginSeen: false,
+		isLogin: false,
+		loginpartSeen: true,
 		infos: ['男 / 1994.07', '集美大学 · 光电信息科学与工程', '本科 / 2017年毕业'],
+		signup: {
+			email: '',
+			password: '',
+		},
+		login:{email:'',password:'',},
 	},
 	methods: {
 		changeInfos(i, ev) {
@@ -29,14 +35,45 @@ let app = new Vue({
 		clickSaveBtn() {
 			var currentUser = AV.User.current();
 			if (currentUser) {
-				this.saveData();
+				this.saveData(currentUser).then(()=>alert('成功保存到云端!'));
+				
 			} else {
-				this.showLogin();
+				this.isLogin = true;
 			}
 		},
-		showLogin() {
-			this.loginSeen = true;
+		saveData(currentUser){
+			var user = AV.Object.createWithoutData('User', currentUser.id);
+user.set('infos', this.infos);
+return user.save();
 		},
-
+		onSignup() {
+			if (this.loginpartSeen) {
+				this.doLogin();
+			} else {
+				this.doSignup();
+			}
+		},
+		doLogin() {
+			AV.User.logIn(this.login.email, this.login.password).then(function(loginedUser) {
+				console.log(loginedUser);
+			}, function(error) {
+				if (error.code === 211) {
+					alert('该邮箱未注册,请先注册!');
+				} else if (error.code === 210) {
+					alert('邮箱和密码不匹配!');
+				}
+			});
+		},
+		doSignup() {
+			let user = new AV.User();
+			user.setUsername(this.signup.email);
+			user.setPassword(this.signup.password);
+			user.setEmail(this.signup.email);
+			user.signUp().then(function(loginedUser) {
+				console.log(loginedUser);
+			}, function(error) {
+				alert('此电子邮箱已经被占用!');
+			});
+		},
 	}
 });
