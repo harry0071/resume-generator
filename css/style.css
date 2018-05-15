@@ -109,8 +109,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     position: relative;
   }
     [contenteditable]:hover:after{
+      font-size: 14px;
       position: absolute;
       content: '✍编辑';
+      color:#00b38a;
     }
     [contenteditable]:focus:after{
       position: absolute;
@@ -322,12 +324,22 @@ a {
   }
 }
 .content-hd .info {
+  text-align: center;
   color: #555;
   line-height: 30px;
+}
+.content-hd .info:hover .add{
+  visibility: visible;
 }
 .content-hd .info h2 {
   margin: 30px 0 4px;
   font-size: 18px;
+}
+.content-hd .info>div{
+  position: relative;
+}
+.content-hd .info>div:hover .del{
+  display: block;
 }
 .content-hd .info h3 {
   font-size: 16px;
@@ -462,12 +474,18 @@ nav{
 .content-bd .section-bd {
   overflow: hidden;
 }
+.content-bd .section-bd:hover .add {
+  visibility: visible;
+}
+.item:hover .del,.item-hd:hover input.item-more{
+  display: block;
+}
 .content-bd .section-title-l,
 .content-bd .section-title-r {
   position: absolute;
   top: 50%;
   display: inline-block;
-  width: 35%;
+  width: 33%;
   height: 0;
   vertical-align: middle;
   border-top: 1px solid #ededed;
@@ -481,7 +499,7 @@ nav{
 .content-bd .section-title {
   position: relative;
   z-index: 1;
-  width: 24%;
+  width: 30%;
   min-width: 100px;
   margin: 0 auto;
   padding: 4px 10px;
@@ -494,6 +512,12 @@ nav{
 }
 .content-bd .section-list {
   padding: 10px 0 5px;
+}
+.content-bd .section-list>li{
+  position: relative;
+}
+.content-bd .section-list>li:hover .del{
+  display: block;
 }
 .content-bd .item-hd {
   position: relative;
@@ -508,7 +532,7 @@ nav{
 .content-bd .item-hd .item-time {
   display: inline-block;
   float: left;
-  width: 25%;
+  width: 24%;
 }
 @media screen and (max-width: 720px) {
   .content-bd .item-hd .item-time {
@@ -745,4 +769,43 @@ footer.print-footer {
     color: #c0c0c0;
     display: inline-block;
   }
+}
+
+.add,.del{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #dad8d7;
+  cursor: pointer;
+  background: white;
+  color: #00b38a;
+  outline: none;
+}
+.add{
+  margin: 0 auto;
+  font-size: 24px;
+  display: block;
+  visibility: hidden;
+}
+.add:hover,.del:hover{
+  background:#00b38a;
+  color: white;
+}
+
+.del{
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+input.item-more{
+  display: none;
+  margin-right: 5px;
+  width:22%;
+  height: 1.5em;
+}
+input.item-more:hover:after{
+  content: '';
 }

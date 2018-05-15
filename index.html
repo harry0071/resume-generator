@@ -32,7 +32,7 @@
         <button id="share-btn">分享</button>
         <button id="print-btn">打印</button>
         <button id="logout" @click="clickLogout" v-show="currentUser" v-cloak>登出</button>
-        {{currentUser}}
+        {{resume}}
     </nav>
 <a class=pdf href=resume.pdf><i class="iconfont icon-pdf"></i> PDF简历</a>
 <div class=content>
@@ -43,144 +43,95 @@
             <section class=practice>
                 <header class=section-hd>
                     <span class=section-title-l></span>
-                    <h2 class="section-title" contenteditable>实践经历</h2>
-                    <span class=section-title-r></span></header>
+                    <h2 class="section-title" contenteditable  @blur="changeResume(`titles[0]`,$event)">{{resume.titles[0]}}</h2>
+                    <span class=section-title-r></span>
+                </header>
                 <div class=section-bd>
-                    <div class=item v-for="(practice,i) in practices">
+                    <div class=item v-for="(practice,i) in resume.practices">
                         <header class=item-hd>
-                            <span class=item-time>{{practice.time}}</span>
-                            <h3 class=item-name>{{practice.company}}</h3>
+                            <span class=item-time contenteditable  @blur="changeResume(`practices[${i}].time`,$event)">{{practice.time}}</span>
+                            <h3 class=item-name contenteditable  @blur="changeResume(`practices[${i}].company`,$event)">{{practice.company}}</h3>
+                            <button class="del" v-if="i>2" @click="deleteItem('practices',i)">x</button>
                         </header>
                         <div class=item-bd>
-                            <p class=section-content>{{practice.description}}</p>
+                            <p class=section-content contenteditable  @blur="changeResume(`practices[${i}].description`,$event)">{{practice.description}}</p>
                         </div>
                     </div>
+                    <button class="add" @click="addPractice">+</button>
                 </div>
             </section>
 
             <section class=project>
                 <header class=section-hd>
                     <span class=section-title-l></span>
-                    <h2 class=section-title contenteditable>项目经验</h2>
+                    <h2 class="section-title" contenteditable  @blur="changeResume(`titles[1]`,$event)">{{resume.titles[1]}}</h2>
                     <span class=section-title-r></span>
                 </header>
                 <div class=section-bd>
-                    <div class=item>
+                    <div class=item v-for="(project,i) in resume.projects">
                         <header class=item-hd>
-                            <span class=item-time>2017.02</span>
-                            <a class="btn item-more" href=http://bookbox.toadw.cn target=_blank>链接</a>
-                            <h3 class=item-name>图书盒子Pro·微信小程序
-                            </h3>
+                            <span class=item-time contenteditable  @blur="changeResume(`projects[${i}].time`,$event)">{{project.time}}</span>
+                            <a class="btn item-more" :href="project.link" target=_blank >项目链接</a>
+                            <input class="item-more" type="text" v-model="project.link" title="必须以http开头" placeholder="网址必须以http开头">
+                            <h3 class=item-name contenteditable @blur="changeResume(`projects[${i}].work`,$event)">{{project.art}}</h3>
+                            <button class="del" v-if="i>2" @click="deleteItem('projects',i)">x</button>
                         </header>
                         <div class=item-bd>
-                            <p class=section-content><strong>产品设计</strong><strong>界面设计</strong><strong>前端开发</strong>
-                                该项目基于微信小程序<em>MINA框架</em>的<em>WXML</em>、<em>WXSS</em>，视图层采用<em>Flex弹性布局</em>，逻辑层采用模块化的开发，项目使用了开放的图书馆数据接口，后端采用
-                                <em>LeanCloud后端云</em>进行云端数据存储，极大方便了同学查询馆藏图书及借阅情况，上线 <em>2周</em>用户近 <em>1000人</em>，Github获得近
-                                <em>50个Star</em>。
-                            </p>
+                            <p class=section-content contenteditable  @blur="changeResume(`projects[${i}].description`,$event)">{{project.description}}</p>
                         </div>
                     </div>
-                    <div class=item>
-                        <header class=item-hd>
-                            <span class=item-time>2016.12</span>
-                            <a class="btn item-more" href=http://think.ucoon.cn target=_blank>链接</a>
-                            <h3 class=item-name>思客拓客·创业想法交流平台</h3>
-                        </header>
-                        <div class=item-bd>
-                            <p class=section-content>
-                                <strong>界面设计</strong><strong>前端开发</strong>
-                                该项目为移动端产品，利用了<em>HTML5</em>、<em>CSS3</em>、<em>Sass</em>、<em>Iconfont</em>、<em>rem自适应</em>等技术来丰富展示前端界面，
-                                使用<em>BaiduTemplate</em>做为模板引擎进行数据逻辑处理，通过<em>Ajax</em>与后端进行数据交互，实现了大量的前后端分离，以及复杂的业务逻辑。
-                            </p>
-                        </div>
-                    </div>
-                    <div class=item>
-                        <header class=item-hd>
-                            <span class=item-time>2016.09</span>
-                            <a class="btn item-more" href=http://www.ucoon.cn target=_blank>链接</a>
-                            <h3 class=item-name>有空·时间售卖与技能交易平台</h3>
-                        </header>
-                        <div class=item-bd>
-                            <p class=section-content><strong>界面设计</strong><strong>前端开发</strong>
-                                该平台是基于微信公众号的移动端Web应用，采用了<em>Vue.js</em>做为<em>MVVM框架</em>，实现了部分数据的前后端分离。产品上线后不断的维护与重构，优化用户体验及性能。
-                            </p>
-                        </div>
-                    </div>
-                    <div class=item>
-                        <header class=item-hd>
-                            <span class=item-time>2016.04</span>
-                            <a class="btn item-more" href=http://toadw.cn/baiduIFE-task/ target=_blank>链接</a>
-                            <h3 class=item-name>百度前端技术学院任务 · 前端练习</h3>
-                        </header>
-                        <div class=item-bd>
-                            <p class=section-content>
-                            通过百度前端技术学院的任务制度，较为系统的学习了Web前端相关的基础知识，通过任务实践，制作<em>demo</em>，并将代码托管在<em>Github</em>上，使用<em>Github
-                            Pages</em>进行demo展示。
-                            </p>
-                        </div>
-                    </div>
+                    <button class="add" @click="addProject">+</button>
                 </div>
             </section>
 
             <section class=skill>
                 <header class=section-hd>
                     <span class=section-title-l></span>
-                    <h2 class=section-title contenteditable>专业技能</h2>
+                    <h2 class="section-title" contenteditable @blur="changeResume(`titles[2]`,$event)">{{resume.titles[2]}}</h2>
                     <span class=section-title-r></span>
                 </header>
                 <div class=section-bd>
                     <ul class=section-list>
-                        <li><p class=section-content><i class="iconfont icon-dot"></i>熟悉使用<em>HTML5</em>、<em>CSS3</em>、<em>Sass</em>，能准确还原设计稿。</p></li>
-                        <li><p class=section-content><i class="iconfont icon-dot"></i> 会点<strong>设计</strong>，有点<strong>审美</strong>能力，重视<strong>用户体验</strong></p></li>
-                        <li><p class=section-content><i class="iconfont icon-dot"></i>了解 <em>MVVM</em>框架 <em>Vue</em>、<strong>微信小程序</strong></p></li>
-                        <li><p class=section-content><i class="iconfont icon-dot"></i> 熟练使用<strong>Git</strong>进行版本控制和代码托管、<strong>Markdown</strong>进行文档编写，并以<strong>MacOS X</strong>、<strong>WebStorm</strong>作为日常开发环境进行工作，了解项目开发流程及开发调试工具的使用。</p></li>
+                        <li v-for="(skill,i) in resume.skills"><p class=section-content contenteditable @blur="changeResume(`skills[${i}]`,$event)"><i class="iconfont icon-dot"></i>{{skill}}</p><button class="del" v-if="i>2" @click="deleteItem('skills',i)">x</button></li>
                     </ul>
+                    <button class="add" @click="addSkill">+</button>
                 </div>
             </section>
 
             <section class=prize>
                 <header class=section-hd>
                     <span class=section-title-l></span>
-                    <h2 class=section-title contenteditable>奖项证书</h2>
+                    <h2 class="section-title" contenteditable @blur="changeResume(`titles[3]`,$event)">{{resume.titles[3]}}</h2>
                     <span class=section-title-r></span>
                 </header>
                 <div class=section-bd>
-                    <div class=item>
+                    <div class=item v-for="(prize,i) in resume.prizes">
                         <header class=item-hd>
-                            <span class=item-time>2013-2017</span>
-                            <span class=item-more>校级</span>
-                            <h3 class=item-name>集美大学专业二等奖学金·多次获得</h3>
+                            <span class=item-time contenteditable @blur="changeResume(`prizes[${i}].time`,$event)">{{prize.time}}</span>
+                            <h3 class=item-name contenteditable @blur="changeResume(`prizes[${i}].description`,$event)">{{prize.description}}</h3>
+                            <button class="del" v-if="i>2" @click="deleteItem('prizes',i)">x</button>
                         </header>
                     </div>
-                    <div class=item>
-                        <header class=item-hd>
-                            <span class=item-time>2015.05</span>
-                            <span class=item-more>校级</span>
-                            <h3 class=item-name>集美大学首届数学建模大赛·二等奖</h3>
-                        </header>
-                    </div>
-                    <div class=item>
-                        <header class=item-hd>
-                            <span class=item-time>2016.09</span>
-                            <span class=item-more>省级</span>
-                            <h3 class=item-name>福建省“创青春”创新创业大赛·创业之星</h3>
-                        </header>
-                    </div>
-                </div>
-            </section>
+                    <button class="add" @click="addPrize">+</button>
+                </section>
         </div>
         <header class="content-right content-hd">
 
             <section class=title>
                 <img class=avator src="">
                 <div class=name>
-                    <h1>王小明</h1>
+                    <h1 contenteditable @blur="changeResume(`name`,$event)">{{resume.name}}</h1>
                 </div>
-               <h2 class="job">Web前端开发工程师</h2>
+               <h2 class="job" contenteditable @blur="changeResume(`job`,$event)">{{resume.job}}</h2>
             </section>
 
             <section class=info>
-                <h2 contenteditable v-for="(info,i) in infos" @blur="changeInfos(i,$event)">{{info}}</h2>
+                <div v-for="(info,i) in resume.infos">
+                   <h2 contenteditable @blur="changeResume(`infos[${i}]`,$event)">{{info}}</h2>
+                   <button class="del" v-if="i>2" @click="deleteItem('infos',i)">x</button>
+                </div>
+                
+                <button class="add" @click="addInfo">+</button>
             </section>
 
             <section class="skill-level">
