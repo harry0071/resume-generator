@@ -114,10 +114,16 @@ return user.save();
 				alert(error.rawMessage);
 			});
 		},
+		print(){
+			document.title = this.resume.name+'的简历';
+			print();
+			document.title = '在线简历编辑器';
+		},
 		getLcData(){
 var query = new AV.Query('User');
   query.get(this.currentUser.id).then((datas)=> {
-    this.currentUser = datas;
+    //this.currentUser = datas;
+    Object.assign(this.currentUser,datas);
     let data = this.currentUser.toJSON();
     Object.assign(this.resume,data.resume);
 

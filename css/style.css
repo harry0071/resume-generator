@@ -677,9 +677,6 @@ footer .footer-link .icon-link {
   color: #d1d1d1;
   font-size: 16px;
 }
-footer.print-footer {
-  display: none;
-}
 
 ::-webkit-scrollbar {
   background-color: #f1f1f1;
@@ -758,11 +755,7 @@ footer.print-footer {
     display: none;
   }
 
-  footer.print-footer {
-    display: block;
-  }
-
-  footer.print-footer .footer-link {
+  .footer-link {
     position: absolute;
     left: 45px;
     bottom: 25px;
@@ -780,10 +773,10 @@ footer.print-footer {
   background: white;
   color: #00b38a;
   outline: none;
+  font-size: 24px;
 }
 .add{
   margin: 0 auto;
-  font-size: 24px;
   display: block;
   visibility: hidden;
 }
@@ -793,7 +786,6 @@ footer.print-footer {
 }
 
 .del{
-  font-size: 20px;
   position: absolute;
   right: 0;
   top: 0;

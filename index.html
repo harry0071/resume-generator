@@ -6,7 +6,7 @@
     <meta name=viewport content="width=device-width,initial-scale=1">
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
-    <title>简历 | 王小明 - Stage</title>
+    <title>在线简历编辑器</title>
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -14,7 +14,7 @@
 <div id="app">
     <div id="login" v-show="isLogin" v-cloak>
         <form @submit.prevent="onSignup">
-            <a href="javascript:;" @click="loginpartSeen=true">登录</a><a href="javascript:;" @click="loginpartSeen=false">注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">x</span>
+            <a href="javascript:;" @click="loginpartSeen=true">登录</a><a href="javascript:;" @click="loginpartSeen=false">注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">×</span>
             <div id="login-part" v-if="loginpartSeen">
             <label>邮箱：<input type="email" required v-model="login.email"></label>
             <label>密码：<input type="password" required v-model="login.password"></label>
@@ -30,7 +30,7 @@
     <nav>
         <button id="save-btn" @click="clickSaveBtn">保存</button>
         <button id="share-btn">分享</button>
-        <button id="print-btn">打印</button>
+        <button id="print-btn" @click="print">打印</button>
         <button id="logout" @click="clickLogout" v-show="currentUser" v-cloak>登出</button>
         {{resume}}
     </nav>
@@ -51,7 +51,7 @@
                         <header class=item-hd>
                             <span class=item-time contenteditable  @blur="changeResume(`practices[${i}].time`,$event)">{{practice.time}}</span>
                             <h3 class=item-name contenteditable  @blur="changeResume(`practices[${i}].company`,$event)">{{practice.company}}</h3>
-                            <button class="del" v-if="i>2" @click="deleteItem('practices',i)">x</button>
+                            <button class="del" v-if="i>2" @click="deleteItem('practices',i)">×</button>
                         </header>
                         <div class=item-bd>
                             <p class=section-content contenteditable  @blur="changeResume(`practices[${i}].description`,$event)">{{practice.description}}</p>
@@ -74,7 +74,7 @@
                             <a class="btn item-more" :href="project.link" target=_blank >项目链接</a>
                             <input class="item-more" type="text" v-model="project.link" title="必须以http开头" placeholder="网址必须以http开头">
                             <h3 class=item-name contenteditable @blur="changeResume(`projects[${i}].work`,$event)">{{project.art}}</h3>
-                            <button class="del" v-if="i>2" @click="deleteItem('projects',i)">x</button>
+                            <button class="del" v-if="i>2" @click="deleteItem('projects',i)">×</button>
                         </header>
                         <div class=item-bd>
                             <p class=section-content contenteditable  @blur="changeResume(`projects[${i}].description`,$event)">{{project.description}}</p>
@@ -92,7 +92,7 @@
                 </header>
                 <div class=section-bd>
                     <ul class=section-list>
-                        <li v-for="(skill,i) in resume.skills"><p class=section-content contenteditable @blur="changeResume(`skills[${i}]`,$event)"><i class="iconfont icon-dot"></i>{{skill}}</p><button class="del" v-if="i>2" @click="deleteItem('skills',i)">x</button></li>
+                        <li v-for="(skill,i) in resume.skills"><p class=section-content contenteditable @blur="changeResume(`skills[${i}]`,$event)"><i class="iconfont icon-dot"></i>{{skill}}</p><button class="del" v-if="i>2" @click="deleteItem('skills',i)">×</button></li>
                     </ul>
                     <button class="add" @click="addSkill">+</button>
                 </div>
@@ -109,7 +109,7 @@
                         <header class=item-hd>
                             <span class=item-time contenteditable @blur="changeResume(`prizes[${i}].time`,$event)">{{prize.time}}</span>
                             <h3 class=item-name contenteditable @blur="changeResume(`prizes[${i}].description`,$event)">{{prize.description}}</h3>
-                            <button class="del" v-if="i>2" @click="deleteItem('prizes',i)">x</button>
+                            <button class="del" v-if="i>2" @click="deleteItem('prizes',i)">×</button>
                         </header>
                     </div>
                     <button class="add" @click="addPrize">+</button>
@@ -128,7 +128,7 @@
             <section class=info>
                 <div v-for="(info,i) in resume.infos">
                    <h2 contenteditable @blur="changeResume(`infos[${i}]`,$event)">{{info}}</h2>
-                   <button class="del" v-if="i>2" @click="deleteItem('infos',i)">x</button>
+                   <button class="del" v-if="i>2" @click="deleteItem('infos',i)">×</button>
                 </div>
                 
                 <button class="add" @click="addInfo">+</button>
@@ -190,9 +190,6 @@
         </header>
 
     </div>
-    <footer class=print-footer>
-        <a class=footer-link href=http://resume.toadw.cn target=_blank><i class="iconfont icon-link"></i> 网页版简历：resume.toadw.cn</a>
-    </footer>
 </div>
 <footer class=github-footer><a class=footer-link href=https://github.com/toadwoo/resume target=_blank><i class="iconfont icon-link"></i> github.com/harry0071/vue-resumeditor</a>
 </footer>
