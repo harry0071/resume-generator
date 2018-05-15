@@ -7,7 +7,11 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
     <title>在线简历编辑器</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/change_skin.css">
+    <link rel="stylesheet" href="css/pink_skin.css">
+    <link rel="stylesheet" href="css/blue_skin.css">
+    <link rel="stylesheet" href="css/purple_skin.css">
 </head>
 <body>
 <!--[if IE]><p class="kill-ie">微软都放弃了IE，为啥你却还不放弃？</p><![endif]-->
@@ -26,16 +30,24 @@
             <button type="submit">注册</button> 
             </div>
         </form>
-    </div> 
+    </div>
+    <div id="change-skin" v-show="changeSkinSeen" v-cloak>
+        <div class="skin-container">
+        <span class="default" @click="changeSkin('default')"></span>
+        <span class="pink" @click="changeSkin('pink')"></span>
+        <span class="blue" @click="changeSkin('blue')"></span>
+        <span class="purple" @click="changeSkin('purple')"></span>
+        </div>
+    </div>
     <nav>
         <button id="save-btn" @click="clickSaveBtn">保存</button>
         <button id="share-btn">分享</button>
         <button id="print-btn" @click="print">打印</button>
+        <button id="skin-btn" @click="changeSkinSeen = !changeSkinSeen">换肤</button>
         <button id="logout" @click="clickLogout" v-show="currentUser" v-cloak>登出</button>
         {{resume}}
     </nav>
-<a class=pdf href=resume.pdf><i class="iconfont icon-pdf"></i> PDF简历</a>
-<div class=content>
+<div class="content" :class="resume.skinColor">
     
     <div class=content-bd>
         <div class=content-left>

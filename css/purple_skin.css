@@ -1,0 +1,21 @@
+div.content.purple .btn{
+  border: 1px solid #607d8b;
+}
+div.content.purple .add:hover,div.content.purple .del:hover{
+  background: #607d8b;
+  color: white;
+}
+
+div.content.purple .btn,div.content.purple .name,div.content.purple .job,div.content.purple .iconfont,div.content.purple [contenteditable]:after,div.content.purple .add,div.content.purple .del{
+  color: #607d8b;
+}
+
+div.content.purple ::selection {
+  background: #607d8b;
+  color: white;
+}
+
+div.content.purple ::-moz-selection {
+  background: #607d8b;
+  color: white;
+}

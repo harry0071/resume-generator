@@ -1,0 +1,21 @@
+div.content.pink .btn{
+  border: 1px solid #ff6e7d;
+}
+div.content.pink .add:hover,div.content.pink .del:hover{
+  background: #ff6e7d;
+  color: white;
+}
+
+div.content.pink .btn,div.content.pink .name,div.content.pink .job,div.content.pink .iconfont,div.content.pink [contenteditable]:after,div.content.pink .add,div.content.pink .del{
+  color: #ff6e7d;
+}
+
+div.content.pink ::selection {
+  background: #ff6e7d;
+  color: white;
+}
+
+div.content.pink ::-moz-selection {
+  background: #ff6e7d;
+  color: white;
+}

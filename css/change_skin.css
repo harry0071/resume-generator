@@ -1,0 +1,45 @@
+#change-skin {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skin-container {
+	width: 120px;
+}
+
+.skin-container span {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: white;
+    margin: 6px;
+}
+.skin-container span:hover{
+	box-shadow: 0 0 12px rgba(255,255,255,.6);
+}
+
+.skin-container span.default{
+	background:#00b38a;
+}
+
+.skin-container span.pink{
+	background:#ff6e7d;
+}
+
+.skin-container span.blue{
+	background:#58a2d2;
+}
+
+.skin-container span.purple{
+	background:#607d8b;
+}

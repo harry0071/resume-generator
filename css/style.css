@@ -638,28 +638,6 @@ nav{
   background-color: #00b38a;
 }
 
-.pdf {
-  display: inline-block;
-  position: fixed;
-  z-index: 10;
-  bottom: 6px;
-  left: 50%;
-  margin-left: 520px;
-  padding: 0 8px;
-  border-radius: 3px;
-  color: #fff;
-  font-size: 16px;
-  line-height: 26px;
-  background-color: #00b38a;
-}
-@media screen and (max-width: 1246px) {
-  .pdf {
-    left: auto;
-    right: 8px;
-    margin-left: 0;
-  }
-}
-
 footer {
   text-align: center;
 }
@@ -744,10 +722,6 @@ footer .footer-link .icon-link {
   }
 
   .content .print-hidden {
-    display: none;
-  }
-
-  .pdf {
     display: none;
   }
 
