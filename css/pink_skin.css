@@ -1,7 +1,7 @@
 div.content.pink .btn{
   border: 1px solid #ff6e7d;
 }
-div.content.pink .add:hover,div.content.pink .del:hover{
+div.content.pink .add:hover,div.content.pink .del:hover,div.content.pink .btn:hover,div.content.pink .content-hd .skill-level .item .in {
   background: #ff6e7d;
   color: white;
 }

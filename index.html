@@ -69,7 +69,7 @@
                             <p class=section-content contenteditable  @blur="changeResume(`practices[${i}].description`,$event)">{{practice.description}}</p>
                         </div>
                     </div>
-                    <button class="add" @click="addPractice">+</button>
+                    <button class="add" @click="addItem('practices')">+</button>
                 </div>
             </section>
 
@@ -92,7 +92,7 @@
                             <p class=section-content contenteditable  @blur="changeResume(`projects[${i}].description`,$event)">{{project.description}}</p>
                         </div>
                     </div>
-                    <button class="add" @click="addProject">+</button>
+                    <button class="add" @click="addItem('projects')">+</button>
                 </div>
             </section>
 
@@ -106,7 +106,7 @@
                     <ul class=section-list>
                         <li v-for="(skill,i) in resume.skills"><p class=section-content contenteditable @blur="changeResume(`skills[${i}]`,$event)"><i class="iconfont icon-dot"></i>{{skill}}</p><button class="del" v-if="i>2" @click="deleteItem('skills',i)">×</button></li>
                     </ul>
-                    <button class="add" @click="addSkill">+</button>
+                    <button class="add" @click="addItem('skills')">+</button>
                 </div>
             </section>
 
@@ -124,13 +124,14 @@
                             <button class="del" v-if="i>2" @click="deleteItem('prizes',i)">×</button>
                         </header>
                     </div>
-                    <button class="add" @click="addPrize">+</button>
+                    <button class="add" @click="addItem('prizes')">+</button>
                 </section>
         </div>
         <header class="content-right content-hd">
 
             <section class=title>
-                <img class=avator src="">
+                <img class=avator :src="resume.imgUrl">
+                <div class="file-container">点击上传头像<input id="file" type="file" @change="saveImg"></div>
                 <div class=name>
                     <h1 contenteditable @blur="changeResume(`name`,$event)">{{resume.name}}</h1>
                 </div>
@@ -143,60 +144,31 @@
                    <button class="del" v-if="i>2" @click="deleteItem('infos',i)">×</button>
                 </div>
                 
-                <button class="add" @click="addInfo">+</button>
+                <button class="add" @click="addItem('infos')">+</button>
             </section>
 
             <section class="skill-level">
-                <h3>HTML</h3>
-                <div class="item i-html">
-                    <i class="in"></i><i class="out"></i>
+                <div class="skillbar-container" v-for="(skillbar,i) in resume.skillbars">
+                   <h3 contenteditable @blur="changeResume(`skillbars[${i}].name`,$event)">{{skillbar.name}}</h3>
+                <div class="item">
+                    <i class="in" :style="{flex:skillbar.flex/10}"></i><i class="out" :style="{flex:(100-skillbar.flex)/10}"></i>
                 </div>
-                <h3>CSS</h3>
-                <div class="item i-css">
-                    <i class="in"></i><i class="out"></i>
-                </div>
-                <h3>JavaScript</h3>
-                <div class="item i-js">
-                    <i class="in"></i><i class="out"></i>
-                </div>
-                <h3>Sass</h3>
-                <div class="item i-sass">
-                    <i class="in"></i><i class="out"></i>
-                </div>
-                <h3>PhotoShop</h3>
-                <div class="item i-ps">
-                    <i class="in"></i><i class="out"></i>
-                </div>
+                <div class="input-container"><input type="text" v-model.number="skillbar.flex">%</div>
+                <button class="del" v-if="i>2" @click="deleteItem('skillbars',i)">×</button>
+            </div>
+            <button class="add" @click="addItem('skillbars')">+</button>
             </section>
 
             <section class=contact>
                 <ul>
-                    <li>
-                        <a href=http://toadw.cn target=_blank>
-                            <i class="iconfont icon-homepage"></i>
-                            <span class=contact-link>toadw.cn</span>
+                    <li v-for="(contact,i) in resume.contacts">
+                        <a href="javascript:;" target=_blank>
+                            <i class="iconfont" :class="contact.icon"></i>
+                            <span class=contact-link contenteditable @blur="changeResume(`contacts[${i}].link`,$event)">{{contact.link}}</span>
                         </a>
+                        <button class="del" v-if="i>4" @click="deleteItem('contacts',i)">×</button>
                     </li>
-                    <li>
-                        <a href=https://github.com/toadwoo target=_blank>
-                            <i class="iconfont icon-github"></i>
-                            <span class=contact-link>github.com/toadwoo</span>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href=mailto:toadwoo@foxmail.com target=_blank>
-                            <i class="iconfont icon-email"></i>
-                            <span class=contact-link>toadwoo@foxmail.com</span>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href=tel:13074852391 target=_blank>
-                            <i class="iconfont icon-phone"></i>
-                            <span class=contact-link>130****2391</span>
-                        </a>
-                    </li>
+                    <button class="add" @click="addItem('contacts')">+</button>
                 </ul>
             </section>
         </header>
@@ -206,7 +178,7 @@
 <footer class=github-footer><a class=footer-link href=https://github.com/toadwoo/resume target=_blank><i class="iconfont icon-link"></i> github.com/harry0071/vue-resumeditor</a>
 </footer>
 </div>
-<script src="https://cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>
 <script src="js/av-init.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/main.js"></script>

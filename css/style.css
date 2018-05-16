@@ -54,6 +54,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+*{
+  transition: .3s;
+}
+
 @font-face {
   font-family: "iconfont";
   src: url("../css/iconfont.ttf") format("truetype");
@@ -208,6 +212,7 @@ a {
   display: block;
   width: 200px;
   height: 200px;
+  border-radius:50%;
   margin: 0 auto;
 }
 @media screen and (max-width: 720px) {
@@ -260,17 +265,45 @@ a {
 .content-hd .skill-level {
   padding-top: 80px;
 }
+.content-hd .skill-level .input-container{
+  color: black;
+  font-size: 18px;
+  position: absolute;
+  top: 12px;
+  right: -16px;
+}
+.content-hd .skill-level .skillbar-container{
+  position: relative;
+}
+.content-hd .skill-level .skillbar-container:hover .del{
+  left: 80%;
+  top: -6px;
+  display: block;
+}
+.content-hd .skill-level:hover .add{
+  visibility: visible;
+}
+.content-hd .skill-level input{
+  width: 32px;
+  height: 26px;
+  font-size: 18px;
+  text-align: right;
+  background: #eee;
+  border: 1px solid #aaa;
+}
 .content-hd .skill-level h3 {
   color: #999;
   margin-left: 5px;
 }
 .content-hd .skill-level .item {
   display: flex;
-  width: 260px;
+  width: 250px;
   height: 12px;
   border-radius: 6px;
   margin-bottom: 15px;
   background: #d7d7d7;
+  overflow: hidden;
+  color: black;
 }
 .content-hd .skill-level .item .in {
   background: #00b38a;
@@ -288,36 +321,6 @@ a {
 .content-hd .skill-level .item .out:last-child {
   border-radius: 0 6px 6px 0;
 }
-.content-hd .skill-level .i-html .in {
-  flex: 8;
-}
-.content-hd .skill-level .i-html .out {
-  flex: 2;
-}
-.content-hd .skill-level .i-css .in {
-  flex: 7;
-}
-.content-hd .skill-level .i-css .out {
-  flex: 3;
-}
-.content-hd .skill-level .i-js .in {
-  flex: 6.5;
-}
-.content-hd .skill-level .i-js .out {
-  flex: 3.5;
-}
-.content-hd .skill-level .i-sass .in {
-  flex: 6;
-}
-.content-hd .skill-level .i-sass .out {
-  flex: 4;
-}
-.content-hd .skill-level .i-ps .in {
-  flex: 7.5;
-}
-.content-hd .skill-level .i-ps .out {
-  flex: 2.5;
-}
 @media screen and (max-width: 1024px) {
   .content-hd .skill-level {
     display: none;
@@ -332,7 +335,7 @@ a {
   visibility: visible;
 }
 .content-hd .info h2 {
-  margin: 30px 0 4px;
+  margin: 14px 0;
   font-size: 18px;
 }
 .content-hd .info>div{
@@ -361,6 +364,9 @@ a {
 .content-hd .contact ul {
   margin: 8px 0 4px;
 }
+.content-hd .contact ul:hover .add{
+  visibility: visible;
+}
 @media screen and (max-width: 1024px) {
   .content-hd .contact ul {
     text-align: center;
@@ -369,7 +375,11 @@ a {
 }
 .content-hd .contact ul > li {
   height: 22px;
-  margin-top: 10px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.content-hd .contact ul > li:hover .del{
+  display: block;
 }
 @media screen and (max-width: 1024px) {
   .content-hd .contact ul > li {
@@ -716,6 +726,15 @@ footer .footer-link .icon-link {
     border-radius: 0;
     padding: 0;
   }
+  .content-hd .skill-level .item{
+    width: 260px;
+  }
+  .content-hd .skill-level .input-container{
+    display: none;
+  }
+  .file-container{
+    display: none;
+  }
 
   .content .content-hd {
     height: 1365px;
@@ -774,4 +793,19 @@ input.item-more{
 }
 input.item-more:hover:after{
   content: '';
+}
+
+.file-container{
+  margin-top: 30px;
+  position: relative;
+  font-size: 20px;
+  color: #555;
+  text-align: center;
+}
+#file{
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
 }

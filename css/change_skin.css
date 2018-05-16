@@ -12,7 +12,7 @@
 }
 
 .skin-container {
-	width: 120px;
+	width: 140px;
 }
 
 .skin-container span {
@@ -21,10 +21,10 @@
     height: 45px;
     border-radius: 50%;
     cursor: pointer;
-    background: white;
-    margin: 6px;
+    margin: 10px;
 }
 .skin-container span:hover{
+    transform: scale(1.5);
 	box-shadow: 0 0 12px rgba(255,255,255,.6);
 }
 
