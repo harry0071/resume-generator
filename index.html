@@ -7,6 +7,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
     <title>在线简历编辑器</title>
+    <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/change_skin.css">
     <link rel="stylesheet" href="css/pink_skin.css">
@@ -45,7 +46,6 @@
         <button id="print-btn" @click="print">打印</button>
         <button id="skin-btn" @click="changeSkinSeen = !changeSkinSeen">换肤</button>
         <button id="logout" @click="clickLogout" v-show="currentUser" v-cloak>登出</button>
-        {{resume}}
     </nav>
 <div class="content" :class="resume.skinColor">
     
