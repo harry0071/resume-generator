@@ -32,22 +32,15 @@
             </div>
         </form>
     </div>
-    <div id="change-skin" v-show="changeSkinSeen">
-        <div class="skin-container">
-        <span class="default" @click="changeSkin('default')"></span>
-        <span class="pink" @click="changeSkin('pink')"></span>
-        <span class="blue" @click="changeSkin('blue')"></span>
-        <span class="purple" @click="changeSkin('purple')"></span>
-        </div>
-    </div>
+    <vue-changeskin v-show="changeSkinSeen" @changeskin="changeSkin($event)"></vue-changeskin>
     <div id="share" v-show="shareSeen">
         <p>{{shareLink}}</p>
     </div>
     <nav v-show="mode===`edit`">
         <button id="save-btn" @click="clickSaveBtn">保存</button>
-        <button id="print-btn" @click="print">打印</button>
-        <button id="share-btn" @click="shareSeen = true">分享</button>
         <button id="skin-btn" @click="changeSkinSeen = !changeSkinSeen">换肤</button>
+        <button id="print-btn" @click="print">打印</button>
+        <button id="share-btn" @click="shareSeen = true" v-show="currentUser">分享</button>
         <button id="logout" @click="clickLogout" v-show="currentUser">登出</button>
     </nav>
 <div class="content" :class="resume.skinColor">
@@ -184,6 +177,7 @@
 <script src="//cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>
 <script src="js/av-init.js"></script>
 <script src="js/vue.js"></script>
+<script src="js/vue-changeskin.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

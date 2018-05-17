@@ -1,5 +1,6 @@
 let app = new Vue({
 	el: '#app',
+	components:{'vue-changeskin':vueChangeskin,},
 	data: {
 		mode:'edit',
 		isLogin: false,

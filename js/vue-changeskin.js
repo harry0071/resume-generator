@@ -1,15 +1,18 @@
-Vue.component('vue-changeskin', {
-	props: ['info'],
-	template: `
-        <div id="change-skin" v-show="changeSkinSeen">
-            <div class="skin-container">
-                <span class="default" @click="changeSkin('default')"></span>
-                <span class="pink" @click="changeSkin('pink')"></span>
-                <span class="blue" @click="changeSkin('blue')"></span>
-                <span class="purple" @click="changeSkin('purple')"></span>
-            </div>
-        </div>`,
-	methods: {
-	},
-
-});
+var vueChangeskin = {
+  template:`<div id="change-skin">
+        <div class="skin-container">
+        <span class="default" @click="$emit('changeskin','default')"></span>
+        <span class="pink" @click="$emit('changeskin','pink')"></span>
+        <span class="blue" @click="$emit('changeskin','blue')"></span>
+        <span class="purple" @click="$emit('changeskin','purple')"></span>
+        </div>
+    </div>`,
+  methods:{
+		
+  },
+  data(){
+    return {
+      number:1,
+    }
+  },
+};
