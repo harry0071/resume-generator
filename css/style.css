@@ -109,16 +109,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-[contenteditable]:{
+[contenteditable=true]:{
     position: relative;
   }
-    [contenteditable]:hover:after{
+    [contenteditable=true]:hover:after{
       font-size: 14px;
       position: absolute;
       content: '✍编辑';
       color:#00b38a;
     }
-    [contenteditable]:focus:after{
+    [contenteditable=true]:focus:after{
       position: absolute;
       content: '';
     }
@@ -650,10 +650,11 @@ nav{
 
 footer {
   text-align: center;
+  color: #d1d1d1;
 }
 footer .footer-link {
   display: inline-block;
-  color: #d1d1d1;
+  color: #00b38a;
   margin-bottom: 25px;
 }
 @media screen and (max-width: 1024px) {

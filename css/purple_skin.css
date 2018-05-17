@@ -6,7 +6,7 @@ div.content.purple .add:hover,div.content.purple .del:hover,div.content.purple .
   color: white;
 }
 
-div.content.purple .btn,div.content.purple .name,div.content.purple .job,div.content.purple .iconfont,div.content.purple [contenteditable]:after,div.content.purple .add,div.content.purple .del{
+div.content.purple .btn,div.content.purple .name,div.content.purple .job,div.content.purple .iconfont,div.content.purple [contenteditable=true]:after,div.content.purple .add,div.content.purple .del,footer.purple .footer-link,footer.purple .iconfont{
   color: #607d8b;
 }
 

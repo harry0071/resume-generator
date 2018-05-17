@@ -1,28 +1,13 @@
-Vue.component('vue-item', {
-	props: ['info'],
-	template: `<div class=item>
-                        <header class=item-hd>
-                            <span class=item-time contenteditable>2017.07 ~ 2018.01</span>
-                            <h3 class=item-name contenteditable>xxxxx</h3>
-                        </header>
-                        <div class=item-bd>
-                            <p class=section-content contenteditable @blur="triggerEdited">{{info}}</p>
-                        </div>
-                    </div>`,
-	methods: {
-		triggerEdited(ev) {
-			this.$emit('get-edit', ev.target.innerText);
-		},
-	}
-
-});
 let app = new Vue({
 	el: '#app',
 	data: {
+		mode:'edit',
 		isLogin: false,
 		changeSkinSeen:false,
 		currentUser:AV.User.current(),
 		shareUser:{id:null},
+		shareSeen:false,
+		shareLink:'',
 		loginpartSeen: true,
 		resume:{
 			imgUrl:'http://ww4.sinaimg.cn/large/87c01ec7gy1fre3iertk9j201s01swe9.jpg',
@@ -43,8 +28,6 @@ let app = new Vue({
 			password: ``,
 		},
 		login:{email:``,password:``,},
-		shareSeen:false,
-		shareLink:'',
 	},
 	watch:{
 		'currentUser' : function (newVal) {
@@ -123,7 +106,7 @@ let app = new Vue({
 		print(){
 			document.title = this.resume.name+'的简历';
 			print();
-			document.title = '在线简历编辑器';
+			document.title = 'STAGE在线简历编辑器';
 		},
 		changeSkin(color){
 			color=='default'? this.resume.skinColor = null : this.resume.skinColor = color;
@@ -159,9 +142,11 @@ if(matches){
 
 if(uid){
 	app.shareUser.id = uid;
+	app.mode = 'share';
 	app.getLcData('shareUser');
 }else if(app.currentUser){
 	app.getLcData('currentUser');
+	app.mode = 'edit';
 }
 
 

@@ -6,7 +6,7 @@ div.content.pink .add:hover,div.content.pink .del:hover,div.content.pink .btn:ho
   color: white;
 }
 
-div.content.pink .btn,div.content.pink .name,div.content.pink .job,div.content.pink .iconfont,div.content.pink [contenteditable]:after,div.content.pink .add,div.content.pink .del{
+div.content.pink .btn,div.content.pink .name,div.content.pink .job,div.content.pink .iconfont,div.content.pink [contenteditable=true]:after,div.content.pink .add,div.content.pink .del,footer.pink .footer-link,footer.pink .iconfont{
   color: #ff6e7d;
 }
 
