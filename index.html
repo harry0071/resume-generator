@@ -40,10 +40,13 @@
         <span class="purple" @click="changeSkin('purple')"></span>
         </div>
     </div>
+    <div id="share" v-show="shareSeen" v-cloak>
+        <p>{{shareLink}}</p>
+    </div>
     <nav>
         <button id="save-btn" @click="clickSaveBtn">保存</button>
-        <button id="share-btn">分享</button>
         <button id="print-btn" @click="print">打印</button>
+        <button id="share-btn" @click="shareSeen = true">分享</button>
         <button id="skin-btn" @click="changeSkinSeen = !changeSkinSeen">换肤</button>
         <button id="logout" @click="clickLogout" v-show="currentUser" v-cloak>登出</button>
     </nav>
@@ -175,7 +178,7 @@
 
     </div>
 </div>
-<footer class=github-footer><a class=footer-link href=https://github.com/toadwoo/resume target=_blank><i class="iconfont icon-link"></i> github.com/harry0071/vue-resumeditor</a>
+<footer class=github-footer><a class=footer-link href=https://github.com/harry0071/vue-resumeditor target=_blank><i class="iconfont icon-link"></i> github.com/harry0071/vue-resumeditor</a>
 </footer>
 </div>
 <script src="//cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>

@@ -22,13 +22,14 @@ let app = new Vue({
 		isLogin: false,
 		changeSkinSeen:false,
 		currentUser:AV.User.current(),
+		shareUser:{id:null},
 		loginpartSeen: true,
 		resume:{
-			imgUrl:'',
+			imgUrl:'http://ww4.sinaimg.cn/large/87c01ec7gy1fre3iertk9j201s01swe9.jpg',
 			skinColor:null,
-			name:'王小明',
-			job:'Web前端开发工程师',
-			infos: ['男', '1994.07', '集美大学', '信息科学与工程'],
+			name:'模板',
+			job:'应聘前端开发工程师',
+			infos: ['男', '1994.07', 'xx大学', '信息科学与工程'],
 			contacts:[{icon:'icon-homepage',link:'http://toadw.cn/'},{icon:'icon-github',link:'https://github.com/toadwoo'},{icon:'icon-email',link:'toadwoo@foxmail.com'},{icon:'icon-phone',link:'tel:138*****123'},{icon:'icon-link',link:'QQ:3511*****'}],
 			titles:['实践经历','项目经验','专业技能','奖项证书'],
 			practices:[{time:`2016.07 ~ 2016.10`,company:`四三九九(厦门)网络股份有限公司`,description:`负责4399儿歌、动漫业务PC端及移动端的多个活动页面的前端开发，原有网站的前端界面更新及维护，使其达到更好的视觉体验和用户体验。同时参与了4399表情站整站的前端开发，并兼容至IE6，上线后不断的维护与优化。`,},{time:`2016.07 ~ 2016.10`,company:`四三九九(厦门)网络股份有限公司`,description:`负责4399儿歌、动漫业务PC端及移动端的多个活动页面的前端开发，原有网站的前端界面更新及维护，使其达到更好的视觉体验和用户体验。同时参与了4399表情站整站的前端开发，并兼容至IE6，上线后不断的维护与优化。`,},{time:`2015.10 ~ 至今`,company:`集美大学·智弧信息科技工作室`,description:`负责与客户对接开发需求、制作原型及UI，并参与项目的研发及维护，此外还负责项目的前端工作分配，参与各创业比赛及路演， 以智弧工作室为项目参加福建省“创青春”创新创业大赛获得创业之星称号。`,}],
@@ -42,6 +43,15 @@ let app = new Vue({
 			password: ``,
 		},
 		login:{email:``,password:``,},
+		shareSeen:false,
+		shareLink:'',
+	},
+	watch:{
+		'currentUser' : function (newVal) {
+			if (newVal) {
+				this.getLcData('currentUser');
+			}
+		},
 	},
 	methods: {
 		changeResume(key, ev) {
@@ -119,18 +129,39 @@ let app = new Vue({
 			color=='default'? this.resume.skinColor = null : this.resume.skinColor = color;
 			this.changeSkinSeen = false;
 		},
-		getLcData(){
+		getLcData(user){
 			var query = new AV.Query('User');
-			query.get(this.currentUser.id).then((datas)=> {
-				//this.currentUser = datas;
+			query.get(this[user].id).then((datas)=> {
+				if(!this.currentUser){
+					this.currentUser={};
+				}
 	    		Object.assign(this.currentUser,datas);
-	    		let data = this.currentUser.toJSON();
+	    		let data = datas.toJSON();
 	    		Object.assign(this.resume,data.resume);
     		});
 		},
 	}
 });
 
-if(app.currentUser){
-	app.getLcData();
+/////////////
+if (app.currentUser) {
+	app.shareLink = location.origin + location.pathname + '?uid=' + app.currentUser.id;
 }
+
+//获取分享链接的uid
+let search = location.search;
+let reg = /\?uid=(\w+)/;
+let matches = search.match(reg);
+let uid;
+if(matches){
+	uid = matches[1];
+}
+
+if(uid){
+	app.shareUser.id = uid;
+	app.getLcData('shareUser');
+}else if(app.currentUser){
+	app.getLcData('currentUser');
+}
+
+
