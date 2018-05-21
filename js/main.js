@@ -1,6 +1,9 @@
-let app = new Vue({
+const app = new Vue({
 	el: '#app',
-	components:{'vue-changeskin':vueChangeskin,},
+	components:{
+		'vue-changeskin':vueChangeskin,
+		'vue-resume':vueResume,
+	},
 	data: {
 		mode:'edit',
 		isLogin: false,
@@ -67,7 +70,7 @@ let app = new Vue({
 			AV.User.logOut().then(()=>location.reload());
 		},
 		saveData(currentUser){
-			var user = AV.Object.createWithoutData('User', currentUser.id);
+			const user = AV.Object.createWithoutData('User', currentUser.id);
 			user.set('resume', this.resume);
 			return user.save();
 		},
@@ -114,7 +117,7 @@ let app = new Vue({
 			this.changeSkinSeen = false;
 		},
 		getLcData(user){
-			var query = new AV.Query('User');
+			const query = new AV.Query('User');
 			query.get(this[user].id).then((datas)=> {
 				if(!this.currentUser){
 					this.currentUser={};
