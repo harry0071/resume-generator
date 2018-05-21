@@ -28,7 +28,7 @@ ol, ul {
 }
 
 button {
-  -webkit-appearance: button;
+  -webkit-appearance: none;
 }
 
 table {
