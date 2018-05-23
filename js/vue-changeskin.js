@@ -7,12 +7,4 @@ var vueChangeskin = {
         <span class="purple" @click="$emit('changeskin','purple')"></span>
         </div>
     </div>`,
-  methods:{
-		
-  },
-  data(){
-    return {
-      number:1,
-    }
-  },
 };

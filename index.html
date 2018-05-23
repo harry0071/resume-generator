@@ -7,7 +7,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
     <title>STAGE在线简历编辑器</title>
-    <link rel="icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/change_skin.css">
     <link rel="stylesheet" href="css/pink_skin.css">
@@ -15,11 +15,10 @@
     <link rel="stylesheet" href="css/purple_skin.css">
 </head>
 <body>
-<!--[if IE]><p class="kill-ie">微软都放弃了IE，为啥你却还不放弃？</p><![endif]-->
 <div id="app" v-cloak>
     <div id="login" v-show="isLogin">
         <form @submit.prevent="onSignup">
-            <a href="javascript:;" @click="loginpartSeen=true">登录</a><a href="javascript:;" @click="loginpartSeen=false">注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">×</span>
+            <a href="javascript:;" @click="loginpartSeen=true" :class={active:loginpartSeen}>登录</a><a href="javascript:;" @click="loginpartSeen=false" :class={active:!loginpartSeen}>注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">×</span>
             <div id="login-part" v-if="loginpartSeen">
             <label>邮箱：<input type="email" required v-model="login.email"></label>
             <label>密码：<input type="password" required v-model="login.password"></label>
@@ -33,19 +32,17 @@
         </form>
     </div>
     <vue-changeskin v-show="changeSkinSeen" @changeskin="changeSkin($event)"></vue-changeskin>
-    <div id="share" v-show="shareSeen">
-        <p>{{shareLink}}</p>
-    </div>
-    <nav v-show="mode===`edit`">
+    <vue-nav v-bind={mode,currentUser,shareLink} v-on={clickSaveBtn,print,clickLogout} @change-skin-seen="changeSkinSeen = !changeSkinSeen"></vue-nav>
+<!--     <nav v-show="mode===`edit`">
         <button id="save-btn" @click="clickSaveBtn">保存</button>
         <button id="skin-btn" @click="changeSkinSeen = !changeSkinSeen">换肤</button>
         <button id="print-btn" @click="print">打印</button>
         <button id="share-btn" @click="shareSeen = true" v-show="currentUser">分享</button>
         <button id="logout" @click="clickLogout" v-show="currentUser">登出</button>
-    </nav>
+    </nav> -->
 <div class="content" :class="resume.skinColor">
-    
-    <div class=content-bd>
+ <vue-resume v-bind={mode,resume} v-on={changeResume,addItem,deleteItem,saveImg}></vue-resume>
+<!--     <div class=content-bd>
         <div class=content-left>
 
             <section class=practice>
@@ -121,6 +118,7 @@
                         </header>
                     </div>
                     <button class="add" v-if="mode===`edit`" @click="addItem('prizes')">+</button>
+                </div>
                 </section>
         </div>
         <header class="content-right content-hd">
@@ -168,17 +166,23 @@
                 </ul>
             </section>
         </header>
-
-    </div>
+    </div> -->
 </div>
 <footer :class="resume.skinColor" class=github-footer><i class="iconfont icon-link"></i>傲娇地使用 <a class=footer-link href=https://github.com/harry0071/vue-resumeditor target=_blank> STAGE在线简历编辑器 </a> 生成简历
 </footer>
 </div>
 <script src="//cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>
 <script src="js/av-init.js"></script>
+<script src="https://cdn.bootcss.com/limonte-sweetalert2/7.20.5/sweetalert2.all.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/vue-changeskin.js"></script>
 <script src="js/vue-resume.js"></script>
+<script src="js/vue-nav.js"></script>
 <script src="js/main.js"></script>
+<script>
+    if(!!window.ActiveXObject || "ActiveXObject" in window){
+        document.body.innerHTML = '<h1 style="font-size:30px;">请使用chrome浏览器打开此页！</h1>';
+    }
+</script>
 </body>
 </html>

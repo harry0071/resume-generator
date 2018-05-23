@@ -3,6 +3,7 @@ const app = new Vue({
 	components:{
 		'vue-changeskin':vueChangeskin,
 		'vue-resume':vueResume,
+		'vue-nav':vueNav,
 	},
 	data: {
 		mode:'edit',
@@ -37,12 +38,13 @@ const app = new Vue({
 		'currentUser' : function (newVal) {
 			if (newVal) {
 				this.getLcData('currentUser');
+				this.creatShareLink();
 			}
 		},
 	},
 	methods: {
 		changeResume(key, ev) {
-			let value = `ev.target.innerText`;
+			const value = `ev.target.innerText`;
 
 			//key === 'skills[0].name'
 			//由于传过来的 skills[0].name 是个字符串,所以要用eval做处理
@@ -54,14 +56,15 @@ const app = new Vue({
 			let avFile = new AV.File(file.name, file).save().then(data=>app.resume.imgUrl=data.thumbnailURL(200, 200),error=>console.log(error));
 		},
 		addItem(key){
-			this.resume[key].push(this.resume[key][this.resume[key].length-1]);
+			const data = this.resume[key][this.resume[key].length-1];
+			this.resume[key].push(JSON.parse(JSON.stringify(data)));
 		},
 		deleteItem(key,i){
 			this.resume[key].splice(i,1);
 		},
 		clickSaveBtn() {
 			if (this.currentUser) {
-				this.saveData(this.currentUser).then(()=>alert('成功保存到云端!'),()=>{alert('保存失败!')});
+				this.saveData(this.currentUser).then(()=>swal("成功保存到云端！",'',"success"),()=>{swal("保存失败！", '',"error");});
 			} else {
 				this.isLogin = true;
 			}
@@ -87,9 +90,9 @@ const app = new Vue({
 				this.currentUser = AV.User.current();
 			}, function(error) {
 				if (error.code === 211) {
-					alert('该邮箱未注册,请先注册!');
+					swal("该邮箱未注册，请先注册！",'',"warning");
 				} else if (error.code === 210) {
-					alert('邮箱和密码不匹配!');
+					swal("邮箱和密码不匹配！",'',"warning");
 				}
 			});
 		},
@@ -99,12 +102,12 @@ const app = new Vue({
 			user.setPassword(this.signup.password);
 			user.setEmail(this.signup.email);
 			user.signUp().then((loginedUser)=> {
-				alert('注册成功!');
+				swal("注册成功",'',"success");
 				this.isLogin = false;
 				this.currentUser = loginedUser;
 			}, function(error) {
 				//console.dir(error) 可以看出error的层级
-				alert(error.rawMessage);
+				swal(error.rawMessage,'',"warning");
 			});
 		},
 		print(){
@@ -127,13 +130,13 @@ const app = new Vue({
 	    		Object.assign(this.resume,data.resume);
     		});
 		},
+		creatShareLink(){
+			if (this.currentUser) {
+			this.shareLink = location.origin + location.pathname + '?uid=' + this.currentUser.id;
+			}
+		},
 	}
 });
-
-/////////////
-if (app.currentUser) {
-	app.shareLink = location.origin + location.pathname + '?uid=' + app.currentUser.id;
-}
 
 //获取分享链接的uid
 let search = location.search;
