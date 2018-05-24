@@ -13,19 +13,21 @@ const vueNav = {
 				title: '下面是您的预览链接',
 				input: 'textarea',
 				inputValue: link,
-				confirmButtonText: `<a style="color:white;" href="${link}" target="_blank">点击预览</a>`,
+				confirmButtonText: '查看预览',
 				showCancelButton: true,
 				cancelButtonText: '确定',
+			}).then((result)=>{
+				if(result.value){
+					open(link);
+				}
 			});
-		}
-	},
-	methods:{
+		},
 		saveBtnText(currentUser){
 			if(currentUser){
 				return '保存到云端';
 			}else{
 				return '登录后保存';
 			}
-		}
+		},
 	},
 };

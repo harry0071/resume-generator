@@ -1,13 +1,14 @@
 const app = new Vue({
 	el: '#app',
 	components:{
+		'vue-login':vueLogin,
 		'vue-changeskin':vueChangeskin,
 		'vue-resume':vueResume,
 		'vue-nav':vueNav,
 	},
 	data: {
 		mode:'edit',
-		isLogin: false,
+		isLogin:false,
 		changeSkinSeen:false,
 		currentUser:AV.User.current(),
 		shareUser:{id:null},
@@ -38,9 +39,14 @@ const app = new Vue({
 		'currentUser' : function (newVal) {
 			if (newVal) {
 				this.getLcData('currentUser');
-				this.creatShareLink();
+				this.shareLink = location.origin + location.pathname + '?uid=' + this.currentUser.id;
 			}
 		},
+	},
+	created(){
+		if (this.currentUser) {
+			this.shareLink = location.origin + location.pathname + '?uid=' + this.currentUser.id;
+		}
 	},
 	methods: {
 		changeResume(key, ev) {
@@ -129,11 +135,6 @@ const app = new Vue({
 	    		let data = datas.toJSON();
 	    		Object.assign(this.resume,data.resume);
     		});
-		},
-		creatShareLink(){
-			if (this.currentUser) {
-			this.shareLink = location.origin + location.pathname + '?uid=' + this.currentUser.id;
-			}
 		},
 	}
 });
