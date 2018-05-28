@@ -1,0 +1,21 @@
+.gray .btn{
+  border: 1px solid #607d8b;
+}
+.gray .add:hover,.gray .del:hover,.gray .btn:hover,.gray .content-hd .skill-level .item .in,.gray nav>button{
+  background: #607d8b;
+  color: white;
+}
+
+.gray .btn,.gray .name,.gray .job,.gray .iconfont,.gray [contenteditable=true]:after,.gray .add,.gray .del,footer.gray .footer-link,footer.gray .iconfont{
+  color: #607d8b;
+}
+
+.gray ::selection {
+  background: #607d8b;
+  color: white;
+}
+
+.gray ::-moz-selection {
+  background: #607d8b;
+  color: white;
+}

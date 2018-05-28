@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="css/change_skin.css">
     <link rel="stylesheet" href="css/pink_skin.css">
     <link rel="stylesheet" href="css/blue_skin.css">
-    <link rel="stylesheet" href="css/purple_skin.css">
+    <link rel="stylesheet" href="css/gray_skin.css">
 </head>
 <body>
-<div id="app" v-cloak>
+<div id="app" :class="resume.skinColor" v-cloak>
 <!--     <div id="login" v-show="isLogin">
         <form @submit.prevent="onSignup">
             <a href="javascript:;" @click="loginpartSeen=true" :class={active:loginpartSeen}>登录</a><a href="javascript:;" @click="loginpartSeen=false" :class={active:!loginpartSeen}>注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">×</span>
@@ -31,6 +31,8 @@
             </div>
         </form>
     </div> -->
+
+    <vue-nav v-bind={mode,currentUser,shareLink} v-on={clickSaveBtn,print,clickLogout} @change-skin-seen="changeSkinSeen = !changeSkinSeen"></vue-nav>
     <vue-login v-bind={loginpartSeen,login,signup,isLogin} v-on={onSignup} @logintrue="loginpartSeen=true" @loginfalse="loginpartSeen=false" @close="isLogin = false;loginpartSeen=true"></vue-login>
     <vue-changeskin v-show="changeSkinSeen" @changeskin="changeSkin($event)"></vue-changeskin>
     
@@ -42,8 +44,7 @@
         <button id="share-btn" @click="shareSeen = true" v-show="currentUser">分享</button>
         <button id="logout" @click="clickLogout" v-show="currentUser">登出</button>
     </nav> -->
-<div class="content" :class="resume.skinColor">
-    <vue-nav v-bind={mode,currentUser,shareLink} v-on={clickSaveBtn,print,clickLogout} @change-skin-seen="changeSkinSeen = !changeSkinSeen"></vue-nav>
+<div class="content">
  <vue-resume v-bind={mode,resume} v-on={changeResume,addItem,deleteItem,saveImg}></vue-resume>
 <!--     <div class=content-bd>
         <div class=content-left>

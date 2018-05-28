@@ -1,21 +1,21 @@
-div.content.blue .btn{
+.blue .btn{
   border: 1px solid #58a2d2;
 }
-div.content.blue .add:hover,div.content.blue .del:hover,div.content.blue .btn:hover,div.content.blue .content-hd .skill-level .item .in,div.content.blue nav>button{
+.blue .add:hover,.blue .del:hover,.blue .btn:hover,.blue .content-hd .skill-level .item .in,.blue nav>button{
   background: #58a2d2;
   color: white;
 }
 
-div.content.blue .btn,div.content.blue .name,div.content.blue .job,div.content.blue .iconfont,div.content.blue [contenteditable=true]:after,div.content.blue .add,div.content.blue .del,footer.blue .footer-link,footer.blue .iconfont{
+.blue .btn,.blue .name,.blue .job,.blue .iconfont,.blue [contenteditable=true]:after,.blue .add,.blue .del,footer.blue .footer-link,footer.blue .iconfont{
   color: #58a2d2;
 }
 
-div.content.blue ::selection {
+.blue ::selection {
   background: #58a2d2;
   color: white;
 }
 
-div.content.blue ::-moz-selection {
+.blue ::-moz-selection {
   background: #58a2d2;
   color: white;
 }
