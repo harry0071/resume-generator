@@ -33,7 +33,7 @@
     </div> -->
     <vue-login v-bind={loginpartSeen,login,signup,isLogin} v-on={onSignup} @logintrue="loginpartSeen=true" @loginfalse="loginpartSeen=false" @close="isLogin = false;loginpartSeen=true"></vue-login>
     <vue-changeskin v-show="changeSkinSeen" @changeskin="changeSkin($event)"></vue-changeskin>
-    <vue-nav v-bind={mode,currentUser,shareLink} v-on={clickSaveBtn,print,clickLogout} @change-skin-seen="changeSkinSeen = !changeSkinSeen"></vue-nav>
+    
 
 <!--     <nav v-show="mode===`edit`">
         <button id="save-btn" @click="clickSaveBtn">保存</button>
@@ -43,6 +43,7 @@
         <button id="logout" @click="clickLogout" v-show="currentUser">登出</button>
     </nav> -->
 <div class="content" :class="resume.skinColor">
+    <vue-nav v-bind={mode,currentUser,shareLink} v-on={clickSaveBtn,print,clickLogout} @change-skin-seen="changeSkinSeen = !changeSkinSeen"></vue-nav>
  <vue-resume v-bind={mode,resume} v-on={changeResume,addItem,deleteItem,saveImg}></vue-resume>
 <!--     <div class=content-bd>
         <div class=content-left>

@@ -16,7 +16,7 @@ const app = new Vue({
 		shareLink:'',
 		loginpartSeen: true,
 		resume:{
-			imgUrl:'http://ww4.sinaimg.cn/large/87c01ec7gy1fre3iertk9j201s01swe9.jpg',
+			imgUrl:'https://i.loli.net/2018/05/27/5b0a6c40ae11c.jpg',
 			skinColor:null,
 			name:'模板',
 			job:'应聘前端开发工程师',

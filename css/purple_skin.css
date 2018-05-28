@@ -1,7 +1,7 @@
 div.content.purple .btn{
   border: 1px solid #607d8b;
 }
-div.content.purple .add:hover,div.content.purple .del:hover,div.content.purple .btn:hover,div.content.purple .content-hd .skill-level .item .in{
+div.content.purple .add:hover,div.content.purple .del:hover,div.content.purple .btn:hover,div.content.purple .content-hd .skill-level .item .in,div.content.purple nav>button{
   background: #607d8b;
   color: white;
 }
