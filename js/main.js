@@ -1,10 +1,10 @@
 const app = new Vue({
 	el: '#app',
 	components:{
-		'vue-login':vueLogin,
-		'vue-changeskin':vueChangeskin,
-		'vue-resume':vueResume,
-		'vue-nav':vueNav,
+		vueLogin,
+		vueChangeskin,
+		vueResume,
+		vueNav,
 	},
 	data: {
 		mode:'edit',

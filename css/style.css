@@ -408,13 +408,38 @@ a {
   justify-content: center;
 
 }
-#login > form{
+
+#login .panfish{
+  position: relative;
+  width: 130px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+#login .panfish > img{
+  width: 100%;
+  position: absolute;
+}
+
+#login .panfish .normal{
+  top: -86px;
+}
+
+#login .panfish .greeting{
+  top: -93px;
+}
+
+#login .panfish .blindfold{
+  top: -81px;
+}
+
+#login form{
   background:white;
   padding: 0 0 20px 0;
   position: relative;
   box-shadow: 0 0 8px #ccc;
 }
-#login > form > a{
+#login form > a{
   background:#d2d8d8;
   width:50%;
   display: inline-block;
@@ -422,7 +447,7 @@ a {
   line-height: 40px;
   color:#929292;
 }
-#login > form > a.active{
+#login form > a.active{
   background:white;
   color: #505260;
 }
@@ -431,7 +456,7 @@ a {
   margin: 20px 0;
 }
 
-#login > form button{
+#login form button{
   width: 100%;
   padding: 10px 0;
   border: none;
@@ -440,7 +465,7 @@ a {
   cursor: pointer;
   border-radius: 3px;
 }
-#login > form button:hover{
+#login form button:hover{
   background: #006741;
 }
 .close{
