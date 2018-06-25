@@ -17,8 +17,8 @@ AV.init({
 });
 
 
-import Login from 'cp/Login.vue';
-import ChangeSkin from 'cp/ChangeSkin.vue';
+const Login = () => import(/* webpackChunkName: "login" */ 'cp/Login.vue');
+const ChangeSkin = () => import(/* webpackChunkName: "change_skin" */ 'cp/ChangeSkin.vue');
 import Resume from 'cp/Resume.vue';
 import LeftNav from 'cp/LeftNav.vue';
 import GithubCorner from 'cp/GithubCorner.vue';

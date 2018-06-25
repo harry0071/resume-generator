@@ -1,11 +1,8 @@
 <template>
-  <div id="login" v-show="isLogin">
+  <div id="login">
   <div style="position:relative;">
   <div class="panfish">
-  <!--   <img src="https://b-gold-cdn.xitu.io/v3/static/img/normal.0447fe9.png" class="normal" v-show="normalSeen">
-    <img src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png" class="greeting" v-show="greetingSeen">
-    <img src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png" class="blindfold" v-show="blindSeen"> -->
-      <img src="@/assets/imgs/normal.png" class="normal" v-show="normalSeen">
+    <img src="@/assets/imgs/normal.png" class="normal" v-show="normalSeen">
     <img src="@/assets/imgs/greeting.png" class="greeting" v-show="greetingSeen">
     <img src="@/assets/imgs/blindfold.png" class="blindfold" v-show="blindSeen">
   </div>
@@ -38,7 +35,7 @@
 
 <script>
   export default {
-    props:['loginpartSeen','login','signup','isLogin'],
+    props:['loginpartSeen','login','signup'],
     data(){
         return {
             normalSeen:true,

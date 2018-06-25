@@ -19,14 +19,16 @@
         </left-nav>
 
         <login
+        v-if="isLogin"
         v-bind={loginpartSeen,login,signup,isLogin}
-        v-on={onSignup} @logintrue="loginpartSeen=true"
+        v-on={onSignup}
+        @logintrue="loginpartSeen=true"
         @loginfalse="loginpartSeen=false"
         @close="isLogin = false;loginpartSeen=true">
         </login>
 
         <change-skin
-        v-show="changeSkinSeen"
+        v-if="changeSkinSeen"
         @changeskin="changeSkin($event)">
         </change-skin>
 

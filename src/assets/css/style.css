@@ -790,7 +790,7 @@ footer .footer-link .icon-link {
   .content-hd .skill-level .item{
     width: 260px;
   }
-  .content-hd .skill-level .input-container{
+  .content-hd .skill-level .input-container,#app>nav{
     display: none;
   }
   .file-container{
