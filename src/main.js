@@ -1,8 +1,8 @@
-import 'css/style.css';
-import 'css/change_skin.css';
-import 'css/pink_skin.css';
-import 'css/blue_skin.css';
-import 'css/gray_skin.css';
+import './assets/css/style.css';
+import './assets/css/change_skin.css';
+import './assets/css/pink_skin.css';
+import './assets/css/blue_skin.css';
+import './assets/css/gray_skin.css';
 
 import Vue from 'vue';
 import swal from 'sweetalert2';
