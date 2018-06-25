@@ -8,182 +8,39 @@
     <meta name="format-detection" content="email=no"/>
     <title>STAGE在线简历编辑器</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/change_skin.css">
-    <link rel="stylesheet" href="css/pink_skin.css">
-    <link rel="stylesheet" href="css/blue_skin.css">
-    <link rel="stylesheet" href="css/gray_skin.css">
 </head>
 <body>
-<div id="app" :class="resume.skinColor" v-cloak>
-<!--     <div id="login" v-show="isLogin">
-        <form @submit.prevent="onSignup">
-            <a href="javascript:;" @click="loginpartSeen=true" :class={active:loginpartSeen}>登录</a><a href="javascript:;" @click="loginpartSeen=false" :class={active:!loginpartSeen}>注册</a><span class="close" @click="isLogin = false;loginpartSeen=true">×</span>
-            <div id="login-part" v-if="loginpartSeen">
-            <label>邮箱：<input type="email" required v-model="login.email"></label>
-            <label>密码：<input type="password" required v-model="login.password"></label>
-            <button type="submit">登录</button> 
-           </div>
-           <div id="signup-part" v-if="!loginpartSeen">
-            <label>邮箱：<input type="email" required v-model="signup.email"></label>
-            <label>密码：<input type="password" required v-model="signup.password"></label>
-            <button type="submit">注册</button> 
-            </div>
-        </form>
-    </div> -->
+    <div id="app" :class="resume.skinColor" v-cloak>
+        <left-nav
+        v-bind={mode,currentUser,shareLink}
+        v-on={clickSaveBtn,print,clickLogout}
+        @change-skin-seen="changeSkinSeen = !changeSkinSeen">
+        </left-nav>
 
-    <vue-nav v-bind={mode,currentUser,shareLink} v-on={clickSaveBtn,print,clickLogout} @change-skin-seen="changeSkinSeen = !changeSkinSeen"></vue-nav>
-    <vue-login v-bind={loginpartSeen,login,signup,isLogin} v-on={onSignup} @logintrue="loginpartSeen=true" @loginfalse="loginpartSeen=false" @close="isLogin = false;loginpartSeen=true"></vue-login>
-    <vue-changeskin v-show="changeSkinSeen" @changeskin="changeSkin($event)"></vue-changeskin>
+        <login
+        v-bind={loginpartSeen,login,signup,isLogin}
+        v-on={onSignup} @logintrue="loginpartSeen=true"
+        @loginfalse="loginpartSeen=false"
+        @close="isLogin = false;loginpartSeen=true">
+        </login>
+
+        <change-skin
+        v-show="changeSkinSeen"
+        @changeskin="changeSkin($event)">
+        </change-skin>
+
+    <div class="content">
+         <resume
+         v-bind={mode,resume}
+         v-on={changeResume,addItem,deleteItem,saveImg}>
+         </resume>
+    </div>
+
+    <footer
+    :class="resume.skinColor" class=github-footer><i class="iconfont icon-link"></i>傲娇地使用 <a class=footer-link href=https://github.com/harry0071/vue-resumeditor target=_blank> STAGE在线简历编辑器 </a> 生成简历
+    </footer>
     
-
-<!--     <nav v-show="mode===`edit`">
-        <button id="save-btn" @click="clickSaveBtn">保存</button>
-        <button id="skin-btn" @click="changeSkinSeen = !changeSkinSeen">换肤</button>
-        <button id="print-btn" @click="print">打印</button>
-        <button id="share-btn" @click="shareSeen = true" v-show="currentUser">分享</button>
-        <button id="logout" @click="clickLogout" v-show="currentUser">登出</button>
-    </nav> -->
-<div class="content">
- <vue-resume v-bind={mode,resume} v-on={changeResume,addItem,deleteItem,saveImg}></vue-resume>
-<!--     <div class=content-bd>
-        <div class=content-left>
-
-            <section class=practice>
-                <header class=section-hd>
-                    <span class=section-title-l></span>
-                    <h2 class="section-title" :contenteditable="mode===`edit`" @blur="changeResume(`titles[0]`,$event)">{{resume.titles[0]}}</h2>
-                    <span class=section-title-r></span>
-                </header>
-                <div class=section-bd>
-                    <div class=item v-for="(practice,i) in resume.practices">
-                        <header class=item-hd>
-                            <span class=item-time :contenteditable="mode===`edit`"  @blur="changeResume(`practices[${i}].time`,$event)">{{practice.time}}</span>
-                            <h3 class=item-name :contenteditable="mode===`edit`"  @blur="changeResume(`practices[${i}].company`,$event)">{{practice.company}}</h3>
-                            <button class="del" v-if="i>2 && mode===`edit`" @click="deleteItem('practices',i)">×</button>
-                        </header>
-                        <div class=item-bd>
-                            <p class=section-content :contenteditable="mode===`edit`"  @blur="changeResume(`practices[${i}].description`,$event)">{{practice.description}}</p>
-                        </div>
-                    </div>
-                    <button class="add" v-if="mode===`edit`" @click="addItem('practices')">+</button>
-                </div>
-            </section>
-
-            <section class=project>
-                <header class=section-hd>
-                    <span class=section-title-l></span>
-                    <h2 class="section-title" :contenteditable="mode===`edit`"  @blur="changeResume(`titles[1]`,$event)">{{resume.titles[1]}}</h2>
-                    <span class=section-title-r></span>
-                </header>
-                <div class=section-bd>
-                    <div class=item v-for="(project,i) in resume.projects">
-                        <header class=item-hd>
-                            <span class=item-time :contenteditable="mode===`edit`"  @blur="changeResume(`projects[${i}].time`,$event)">{{project.time}}</span>
-                            <a class="btn item-more" :href="project.link" target=_blank >项目链接</a>
-                            <input class="item-more" type="text" v-model="project.link" title="必须以http开头" placeholder="网址必须以http开头" v-if="mode===`edit`">
-                            <h3 class=item-name :contenteditable="mode===`edit`" @blur="changeResume(`projects[${i}].work`,$event)">{{project.art}}</h3>
-                            <button class="del" v-if="i>2 && mode===`edit`" @click="deleteItem('projects',i)">×</button>
-                        </header>
-                        <div class=item-bd>
-                            <p class=section-content :contenteditable="mode===`edit`"  @blur="changeResume(`projects[${i}].description`,$event)">{{project.description}}</p>
-                        </div>
-                    </div>
-                    <button class="add" v-if="mode===`edit`" @click="addItem('projects')">+</button>
-                </div>
-            </section>
-
-            <section class=skill>
-                <header class=section-hd>
-                    <span class=section-title-l></span>
-                    <h2 class="section-title" :contenteditable="mode===`edit`" @blur="changeResume(`titles[2]`,$event)">{{resume.titles[2]}}</h2>
-                    <span class=section-title-r></span>
-                </header>
-                <div class=section-bd>
-                    <ul class=section-list>
-                        <li v-for="(skill,i) in resume.skills"><p class=section-content :contenteditable="mode===`edit`" @blur="changeResume(`skills[${i}]`,$event)"><i class="iconfont icon-dot"></i>{{skill}}</p><button class="del" v-if="i>2 && mode===`edit`" @click="deleteItem('skills',i)">×</button></li>
-                    </ul>
-                    <button class="add" v-if="mode===`edit`" @click="addItem('skills')">+</button>
-                </div>
-            </section>
-
-            <section class=prize>
-                <header class=section-hd>
-                    <span class=section-title-l></span>
-                    <h2 class="section-title" :contenteditable="mode===`edit`" @blur="changeResume(`titles[3]`,$event)">{{resume.titles[3]}}</h2>
-                    <span class=section-title-r></span>
-                </header>
-                <div class=section-bd>
-                    <div class=item v-for="(prize,i) in resume.prizes">
-                        <header class=item-hd>
-                            <span class=item-time :contenteditable="mode===`edit`" @blur="changeResume(`prizes[${i}].time`,$event)">{{prize.time}}</span>
-                            <h3 class=item-name :contenteditable="mode===`edit`" @blur="changeResume(`prizes[${i}].description`,$event)">{{prize.description}}</h3>
-                            <button class="del" v-if="i>2 && mode===`edit`" @click="deleteItem('prizes',i)">×</button>
-                        </header>
-                    </div>
-                    <button class="add" v-if="mode===`edit`" @click="addItem('prizes')">+</button>
-                </div>
-                </section>
-        </div>
-        <header class="content-right content-hd">
-
-            <section class=title>
-                <img class=avator :src="resume.imgUrl">
-                <div class="file-container" v-if="mode===`edit`">点击上传头像<input id="file" type="file" @change="saveImg"></div>
-                <div class=name>
-                    <h1 :contenteditable="mode===`edit`" @blur="changeResume(`name`,$event)">{{resume.name}}</h1>
-                </div>
-               <h2 class="job" :contenteditable="mode===`edit`" @blur="changeResume(`job`,$event)">{{resume.job}}</h2>
-            </section>
-
-            <section class=info>
-                <div v-for="(info,i) in resume.infos">
-                   <h2 :contenteditable="mode===`edit`" @blur="changeResume(`infos[${i}]`,$event)">{{info}}</h2>
-                   <button class="del" v-if="i>2 && mode===`edit`" @click="deleteItem('infos',i)">×</button>
-                </div>
-                
-                <button class="add" v-if="mode===`edit`" @click="addItem('infos')">+</button>
-            </section>
-
-            <section class="skill-level">
-                <div class="skillbar-container" v-for="(skillbar,i) in resume.skillbars">
-                   <h3 :contenteditable="mode===`edit`" @blur="changeResume(`skillbars[${i}].name`,$event)">{{skillbar.name}}</h3>
-                <div class="item" :style="mode===`edit`?'':`width:260px;`">
-                    <i class="in" :style="{flex:skillbar.flex/10}"></i><i class="out" :style="{flex:(100-skillbar.flex)/10}"></i>
-                </div>
-                <div class="input-container"><input type="text" v-model.number="skillbar.flex" v-if="mode===`edit`">{{mode===`edit`?`%`:''}}</div>
-                <button class="del" v-if="i>2 && mode===`edit`" @click="deleteItem('skillbars',i)">×</button>
-            </div>
-            <button class="add" v-if="mode===`edit`" @click="addItem('skillbars')">+</button>
-            </section>
-
-            <section class=contact>
-                <ul>
-                    <li v-for="(contact,i) in resume.contacts">
-                        <a href="javascript:;" target=_blank>
-                            <i class="iconfont" :class="contact.icon"></i>
-                            <span class=contact-link :contenteditable="mode===`edit`" @blur="changeResume(`contacts[${i}].link`,$event)">{{contact.link}}</span>
-                        </a>
-                        <button class="del" v-if="i>4 && mode===`edit`" @click="deleteItem('contacts',i)">×</button>
-                    </li>
-                    <button class="add" v-if="mode===`edit`" @click="addItem('contacts')">+</button>
-                </ul>
-            </section>
-        </header>
-    </div> -->
 </div>
-<footer :class="resume.skinColor" class=github-footer><i class="iconfont icon-link"></i>傲娇地使用 <a class=footer-link href=https://github.com/harry0071/vue-resumeditor target=_blank> STAGE在线简历编辑器 </a> 生成简历
-</footer>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.6.8/av-min.js"></script>
-<script src="js/av-init.js"></script>
-<script src="https://cdn.bootcss.com/limonte-sweetalert2/7.20.5/sweetalert2.all.min.js"></script>
-<script src="js/vue.js"></script>
-<script src="js/vue-login.js"></script>
-<script src="js/vue-changeskin.js"></script>
-<script src="js/vue-resume.js"></script>
-<script src="js/vue-nav.js"></script>
-<script src="js/main.js"></script>
 <script>
     if(!!window.ActiveXObject || "ActiveXObject" in window){
         document.body.innerHTML = '<h1 style="font-size:30px;">请使用chrome浏览器打开此页！</h1>';

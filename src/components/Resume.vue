@@ -1,8 +1,7 @@
-const vueResume = {
-	props:['mode','resume'],
-  template:`<div class=content-bd>
+<template>
+    <div class=content-bd>
         <div class=content-left>
-        	<section class=practice>
+            <section class=practice>
                 <header class=section-hd>
                     <span class=section-title-l></span>
                     <h2 class="section-title" :contenteditable="mode==='edit'" @blur="$emit('changeResume','titles[0]',$event)">{{resume.titles[0]}}</h2>
@@ -123,5 +122,11 @@ const vueResume = {
                 </ul>
             </section>
         </header>
-    </div>`,
-};
+    </div>
+</template>
+
+<script>
+    export default {
+        props:['mode','resume'],
+    }
+</script>

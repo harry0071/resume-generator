@@ -1,6 +1,5 @@
-const vueLogin = {
-    props:['loginpartSeen','login','signup','isLogin'],
-  template:`<div id="login" v-show="isLogin">
+<template>
+  <div id="login" v-show="isLogin">
   <div style="position:relative;">
   <div class="panfish">
   <img src="https://b-gold-cdn.xitu.io/v3/static/img/normal.0447fe9.png" class="normal" v-show="normalSeen">
@@ -30,15 +29,18 @@ const vueLogin = {
             </div>
         </form>
         </div>
-    </div>`,
+    </div>
+</template>
+
+<script>
+  export default {
+    props:['loginpartSeen','login','signup','isLogin'],
     data(){
         return {
             normalSeen:true,
             greetingSeen:false,
             blindSeen:false,
         }
-    },
-    methods:{
-
-    },
-};
+    }
+  }
+</script>

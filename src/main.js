@@ -1,10 +1,34 @@
+import 'css/style.css';
+import 'css/change_skin.css';
+import 'css/pink_skin.css';
+import 'css/blue_skin.css';
+import 'css/gray_skin.css';
+
+import Vue from 'vue';
+import swal from 'sweetalert2';
+
+import AV from 'leancloud-storage';
+let APP_ID = 'U2vtDMuIgkOrm8iLIQzs9YsR-gzGzoHsz';
+let APP_KEY = 'ohdM2AWuPnuLTicwNt3eIxJA';
+
+AV.init({
+	appId: APP_ID,
+	appKey: APP_KEY
+});
+
+
+import Login from 'cp/Login.vue';
+import ChangeSkin from 'cp/ChangeSkin.vue';
+import Resume from 'cp/Resume.vue';
+import LeftNav from 'cp/LeftNav.vue';
+
 const app = new Vue({
 	el: '#app',
 	components:{
-		vueLogin,
-		vueChangeskin,
-		vueResume,
-		vueNav,
+		Login,
+		ChangeSkin,
+		Resume,
+		LeftNav,
 	},
 	data: {
 		mode:'edit',
