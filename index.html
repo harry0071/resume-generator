@@ -7,10 +7,11 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="format-detection" content="email=no"/>
     <title>STAGE在线简历编辑器</title>
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="static/favicon.ico">
 </head>
 <body>
     <div id="app" :class="resume.skinColor" v-cloak>
+        <github-corner></github-corner>
         <left-nav
         v-bind={mode,currentUser,shareLink}
         v-on={clickSaveBtn,print,clickLogout}

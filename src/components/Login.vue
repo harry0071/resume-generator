@@ -2,9 +2,13 @@
   <div id="login" v-show="isLogin">
   <div style="position:relative;">
   <div class="panfish">
-  <img src="https://b-gold-cdn.xitu.io/v3/static/img/normal.0447fe9.png" class="normal" v-show="normalSeen">
-  <img src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png" class="greeting" v-show="greetingSeen">
-  <img src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png" class="blindfold" v-show="blindSeen"></div>
+  <!--   <img src="https://b-gold-cdn.xitu.io/v3/static/img/normal.0447fe9.png" class="normal" v-show="normalSeen">
+    <img src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png" class="greeting" v-show="greetingSeen">
+    <img src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png" class="blindfold" v-show="blindSeen"> -->
+      <img src="@/assets/imgs/normal.png" class="normal" v-show="normalSeen">
+    <img src="@/assets/imgs/greeting.png" class="greeting" v-show="greetingSeen">
+    <img src="@/assets/imgs/blindfold.png" class="blindfold" v-show="blindSeen">
+  </div>
   <form @submit.prevent="$emit('onSignup')">
             <a href="javascript:;" @click="$emit('logintrue')" :class={active:loginpartSeen}>登录</a><a href="javascript:;" @click="$emit('loginfalse')" :class={active:!loginpartSeen}>注册</a><span class="close" @click="$emit('close')">×</span>
             <div id="login-part" v-if="loginpartSeen">

@@ -21,6 +21,7 @@ import Login from 'cp/Login.vue';
 import ChangeSkin from 'cp/ChangeSkin.vue';
 import Resume from 'cp/Resume.vue';
 import LeftNav from 'cp/LeftNav.vue';
+import GithubCorner from 'cp/GithubCorner.vue';
 
 const app = new Vue({
 	el: '#app',
@@ -29,6 +30,7 @@ const app = new Vue({
 		ChangeSkin,
 		Resume,
 		LeftNav,
+		GithubCorner
 	},
 	data: {
 		mode:'edit',
