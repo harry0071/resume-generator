@@ -482,25 +482,7 @@ a {
 #login-part input,#signup-part input{
   padding:4px 6px;
 }
-nav{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-nav>button{
-  padding: 10px;
-  border:none;
-  background: #00b38a;
-  color:white;
-  cursor: pointer;
-  margin-bottom: 1px;
-}
-nav>button:hover{
-  filter: brightness(1.2);
-}
+
 .content-bd {
   display: flex;
   min-height: 200px;
@@ -790,7 +772,7 @@ footer .footer-link .icon-link {
   .content-hd .skill-level .item{
     width: 260px;
   }
-  .content-hd .skill-level .input-container,#app>nav{
+  .content-hd .skill-level .input-container{
     display: none;
   }
   .file-container{

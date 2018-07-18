@@ -37,3 +37,31 @@
 		},
 	}
 </script>
+
+<style>
+	nav{
+	  display: flex;
+	  flex-direction: column;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  z-index: 1;
+	}
+	nav>button{
+	  padding: 10px;
+	  border:none;
+	  background: #00b38a;
+	  color:white;
+	  cursor: pointer;
+	  margin-bottom: 1px;
+	}
+	nav>button:hover{
+	  filter: brightness(1.2);
+	}
+
+	@media print{
+		nav{
+			display: none;
+		}
+	}
+</style>
