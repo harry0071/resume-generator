@@ -36,7 +36,7 @@ npm run build --report
 - 除了默认主题色，还支持另外3种颜色(换肤功能)
 
 ## 更新日志
-- 换肤组件(ChangeSkin.vue)和登录组件(Login.vue)定义为异步组件，按需加载，从而节省首次加载的时间，提高页面打开的速度
+- 换肤组件(ChangeSkin.vue)和登录组件(Login.vue)做成异步组件，配合 webpack 的 code-splitting 功能实现按需加载，从而节省首次加载的时间，提高页面打开的速度
 - 右上角添加Github图标链接
 - 登录框添加动画效果
 - 添加上传头像功能
