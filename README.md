@@ -65,17 +65,3 @@ npm run build --report
   	</pre>
   </p>
 </details>
-<details>
-  <summary>vue的html中不能出现delete</summary>
-  <p>
-    <pre>
-      <div @click="delete"></div>
-      这样写会报错，经查，是由于html中不能用delete
-    </pre>
-  </p>
-    <p>解决办法：
-    <pre>
-      换个函数名，比如remove
-    </pre>
-  </p>
-</details>
