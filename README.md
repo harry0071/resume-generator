@@ -1,32 +1,13 @@
 # vue在线简历制作器
 
-> 一款基于Vue.js的在线简历制作工具，可以方便的生成精美的个人简历。
+> 一款基于Vue.js的在线简历制作工具，可以方便的生成精美的个人简历。           
+如果你喜欢此项目，欢迎点右上角 "star"一下，非常感谢！ 🤞
 
-# 效果演示
-## 这里改成预览图
-## 这里改成预览链接
-PC端建议开启chrome，然后`Ctrl + Shift + I`开启调试模式食用更佳
+# 预览
+预览链接👉 [点击预览](https://harry0071.github.io/resume-generator) 
 
 # 技术栈
-vue + vue-cli + es6 + webpack
-
-## 用法
-将项目clone到本地。然后执行下面的命令
-
-``` bash
-# 首先安装依赖
-npm i
-
-# 然后运行项目
-npm start
-
-# 发布打包
-npm run build
-
-# 或者
-# 发布打包并查看分析报告
-npm run build --report
-```
+vue + vue-cli + es6 + leancloud + 响应式布局
 
 ## 功能
 - 根据模板，在线生成精美的个人简历
@@ -36,13 +17,14 @@ npm run build --report
 - 除了默认主题色，还支持另外3种颜色(换肤功能)
 
 ## 更新日志
-- 换肤组件(ChangeSkin.vue)和登录组件(Login.vue)做成异步组件，配合 webpack 的 code-splitting 功能实现按需加载，从而节省首次加载的时间，提高页面打开的速度
-- 右上角添加Github图标链接
-- 登录框添加动画效果
-- 添加上传头像功能
-- 添加换肤功能
-- 添加分享链接 & 预览功能
-- 添加打印功能
+- 更新：上传头像限制图片格式，且图片最大5mb以内
+- 优化：换肤组件(ChangeSkin.vue)和登录组件(Login.vue)做成异步组件，配合 webpack 的 code-splitting 功能实现按需加载，从而节省首次加载的时间，提高页面打开的速度
+- 新增：右上角添加Github图标链接
+- 新增：注册登录添加动画效果
+- 新增：上传头像功能
+- 新增：换肤功能
+- 新增：分享链接 & 预览功能
+- 新增：打印功能
 
 ## 问题汇总
 <details>
@@ -64,4 +46,11 @@ npm run build --report
   		eval(`this.resume.${str}`)
   	</pre>
   </p>
+</details>
+<details>
+  <summary>限制上传头像格式</summary>
+  通过设置accept，限制只能上传图片     
+  ```html
+  <input type="file" accept="image/*" />
+  ```
 </details>
