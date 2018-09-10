@@ -51,7 +51,7 @@ vue + vue-cli + es6 + leancloud + 响应式布局
 <details>
   <summary>限制上传头像格式</summary>
   通过设置accept，限制只能上传图片     
-  ```html
-  <input type="file" accept="image/*" />
-  ```
+<pre>
+  &lt;input type="file" accept="image/*" />
+</pre>
 </details>
