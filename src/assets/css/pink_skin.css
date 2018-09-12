@@ -1,0 +1,21 @@
+.pink .btn{
+  border: 1px solid #ff6e7d;
+}
+.pink .add:hover,.pink .del:hover,.pink .btn:hover,.pink .content-hd .skill-level .item .in,.pink nav>button {
+  background: #ff6e7d;
+  color: white;
+}
+
+.pink .btn,.pink .name,.pink .job,.pink .iconfont,.pink [contenteditable=true]:after,.pink .add,.pink .del,footer.pink .footer-link,footer.pink .iconfont{
+  color: #ff6e7d;
+}
+
+.pink ::selection {
+  background: #ff6e7d;
+  color: white;
+}
+
+.pink ::-moz-selection {
+  background: #ff6e7d;
+  color: white;
+}

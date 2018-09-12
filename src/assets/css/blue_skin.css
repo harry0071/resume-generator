@@ -1,0 +1,21 @@
+.blue .btn{
+  border: 1px solid #58a2d2;
+}
+.blue .add:hover,.blue .del:hover,.blue .btn:hover,.blue .content-hd .skill-level .item .in,.blue nav>button{
+  background: #58a2d2;
+  color: white;
+}
+
+.blue .btn,.blue .name,.blue .job,.blue .iconfont,.blue [contenteditable=true]:after,.blue .add,.blue .del,footer.blue .footer-link,footer.blue .iconfont{
+  color: #58a2d2;
+}
+
+.blue ::selection {
+  background: #58a2d2;
+  color: white;
+}
+
+.blue ::-moz-selection {
+  background: #58a2d2;
+  color: white;
+}
