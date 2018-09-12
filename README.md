@@ -7,6 +7,8 @@
 # 预览
 预览链接👉 [点击预览](https://harry0071.github.io/resume-generator) 
 
+![x.gif](https://i.loli.net/2018/09/12/5b986af5012ab.gif)
+
 # 技术栈
 vue + vue-cli + es6 + leancloud + 响应式布局
 
