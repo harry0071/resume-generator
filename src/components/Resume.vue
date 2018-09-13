@@ -1,5 +1,50 @@
 <template>
     <div class=content-bd>
+        <header class="content-right content-hd">
+
+            <section class=title>
+                <img class=avator :src="resume.imgUrl">
+                <div class="file-container" v-if="mode==='edit'">点击上传头像<input id="file" type="file" @change="$emit('saveImg',$event)" accept="image/*"></div>
+                <div class=name>
+                    <h1 :contenteditable="mode==='edit'" @blur="$emit('changeResume','name',$event)">{{resume.name}}</h1>
+                </div>
+               <h2 class="job" :contenteditable="mode==='edit'" @blur="$emit('changeResume','job',$event)">{{resume.job}}</h2>
+            </section>
+
+            <section class=info>
+                <div v-for="(info,i) in resume.infos">
+                   <h2 :contenteditable="mode==='edit'" @blur="$emit('changeResume','infos['+i+']',$event)">{{info}}</h2>
+                   <button class="del" v-if="i>2 && mode==='edit'" @click="$emit('deleteItem','infos',i)">×</button>
+                </div>
+                
+                <button class="add" v-if="mode==='edit'" @click="$emit('addItem','infos')">+</button>
+            </section>
+
+            <section class="skill-level">
+                <div class="skillbar-container" v-for="(skillbar,i) in resume.skillbars">
+                   <h3 :contenteditable="mode==='edit'" @blur="$emit('changeResume','skillbars['+i+'].name',$event)">{{skillbar.name}}</h3>
+                <div class="item" :style="mode==='edit'?'':'width:260px;'">
+                    <i class="in" :style="{flex:skillbar.flex/10}"></i><i class="out" :style="{flex:(100-skillbar.flex)/10}"></i>
+                </div>
+                <div class="input-container"><input type="text" v-model.number="skillbar.flex" v-if="mode==='edit'">{{mode==='edit'?'%':''}}</div>
+                <button class="del" v-if="i>2 && mode==='edit'" @click="$emit('deleteItem','skillbars',i)">×</button>
+            </div>
+            <button class="add" v-if="mode==='edit'" @click="$emit('addItem','skillbars')">+</button>
+            </section>
+
+            <section class=contact>
+                <ul>
+                    <li v-for="(contact,i) in resume.contacts">
+                        <a href="javascript:;" target=_blank>
+                            <i class="iconfont" :class="contact.icon"></i>
+                            <span class=contact-link :contenteditable="mode==='edit'" @blur="$emit('changeResume','contacts['+i+'].link',$event)">{{contact.link}}</span>
+                        </a>
+                        <button class="del" v-if="i>4 && mode==='edit'" @click="$emit('deleteItem','contacts',i)">×</button>
+                    </li>
+                    <button class="add" v-if="mode==='edit'" @click="$emit('addItem','contacts')">+</button>
+                </ul>
+            </section>
+        </header>
         <div class=content-left>
             <section class=practice>
                 <header class=section-hd>
@@ -77,51 +122,6 @@
                     </div>
                 </section>
         </div>
-        <header class="content-right content-hd">
-
-            <section class=title>
-                <img class=avator :src="resume.imgUrl">
-                <div class="file-container" v-if="mode==='edit'">点击上传头像<input id="file" type="file" @change="$emit('saveImg',$event)" accept="image/*"></div>
-                <div class=name>
-                    <h1 :contenteditable="mode==='edit'" @blur="$emit('changeResume','name',$event)">{{resume.name}}</h1>
-                </div>
-               <h2 class="job" :contenteditable="mode==='edit'" @blur="$emit('changeResume','job',$event)">{{resume.job}}</h2>
-            </section>
-
-            <section class=info>
-                <div v-for="(info,i) in resume.infos">
-                   <h2 :contenteditable="mode==='edit'" @blur="$emit('changeResume','infos['+i+']',$event)">{{info}}</h2>
-                   <button class="del" v-if="i>2 && mode==='edit'" @click="$emit('deleteItem','infos',i)">×</button>
-                </div>
-                
-                <button class="add" v-if="mode==='edit'" @click="$emit('addItem','infos')">+</button>
-            </section>
-
-            <section class="skill-level">
-                <div class="skillbar-container" v-for="(skillbar,i) in resume.skillbars">
-                   <h3 :contenteditable="mode==='edit'" @blur="$emit('changeResume','skillbars['+i+'].name',$event)">{{skillbar.name}}</h3>
-                <div class="item" :style="mode==='edit'?'':'width:260px;'">
-                    <i class="in" :style="{flex:skillbar.flex/10}"></i><i class="out" :style="{flex:(100-skillbar.flex)/10}"></i>
-                </div>
-                <div class="input-container"><input type="text" v-model.number="skillbar.flex" v-if="mode==='edit'">{{mode==='edit'?'%':''}}</div>
-                <button class="del" v-if="i>2 && mode==='edit'" @click="$emit('deleteItem','skillbars',i)">×</button>
-            </div>
-            <button class="add" v-if="mode==='edit'" @click="$emit('addItem','skillbars')">+</button>
-            </section>
-
-            <section class=contact>
-                <ul>
-                    <li v-for="(contact,i) in resume.contacts">
-                        <a href="javascript:;" target=_blank>
-                            <i class="iconfont" :class="contact.icon"></i>
-                            <span class=contact-link :contenteditable="mode==='edit'" @blur="$emit('changeResume','contacts['+i+'].link',$event)">{{contact.link}}</span>
-                        </a>
-                        <button class="del" v-if="i>4 && mode==='edit'" @click="$emit('deleteItem','contacts',i)">×</button>
-                    </li>
-                    <button class="add" v-if="mode==='edit'" @click="$emit('addItem','contacts')">+</button>
-                </ul>
-            </section>
-        </header>
     </div>
 </template>
 
